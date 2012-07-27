@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -45,6 +46,9 @@ public class User extends ModelBase<User, String> {
 	private String phone;
 	@Basic
 	private Role role;
+	
+	@OneToMany(mappedBy="Orders")
+	private List<Order> orders;
 	
 	public User() {
 		
@@ -150,6 +154,18 @@ public class User extends ModelBase<User, String> {
 		return (this.role == Role.ADMIN);
 	}
 
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	
+	public List<Order> getOrders() {
+		return this.orders;
+	}
+	
+	public boolean addOrder(Order order) {
+		return false;
+	}
+	
 	@Override
 	public String getTableName() {
 		return "Users";

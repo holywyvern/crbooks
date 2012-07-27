@@ -13,6 +13,11 @@ import org.hibernate.Transaction;
 
 public abstract class ModelBase<T, PK extends Serializable> implements IDatabaseModel<T, PK> {
 
+	public ModelBase() {
+		
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public boolean save() {
 		T object = (T)this;
