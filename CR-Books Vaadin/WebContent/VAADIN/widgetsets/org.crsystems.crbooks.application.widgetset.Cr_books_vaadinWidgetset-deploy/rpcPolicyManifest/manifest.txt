@@ -1,0 +1,2 @@
+# Module org.crsystems.crbooks.application.widgetset.Cr_books_vaadinWidgetset
+# RPC service class, partial path of RPC policy file

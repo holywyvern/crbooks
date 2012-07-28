@@ -1,0 +1,19 @@
+@import url(../reindeer/styles.css);
+
+.cr-books-logo-bar {
+	font-size: 2em;
+	color: #FFFFFF;
+	padding: 0.2em 0.1em;
+	background-image: url(img/menu-background.bmp);
+}
+
+.cr-books-menu-commands {
+	color: #FFFFFF;
+	padding: 0.2em 0.1em;
+	background-image: url(img/menu-background.bmp);
+	text-decoration: underline;
+}
+
+.cr-books-menu-commands .v-menubar-menuitem-caption {
+	text-decoration: underline;
+}

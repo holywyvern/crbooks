@@ -16,7 +16,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.BaseTheme;
 
-public class LoginWindow extends Window {
+public class LoginWindow extends CustomComponent {
 
 	private VerticalLayout mainLayout;
 	private Panel panelLogin;
@@ -32,7 +32,7 @@ public class LoginWindow extends Window {
 
 	public LoginWindow() {
 		this.buildMainLayout();
-		this.addComponent(mainLayout);
+		this.setCompositionRoot(mainLayout);
 		this.makeListeners();
 	}
 
@@ -69,19 +69,20 @@ public class LoginWindow extends Window {
 		// common part: create layout
 		mainLayout = new VerticalLayout();
 		mainLayout.setImmediate(true);
-		mainLayout.setWidth("-1px");
-		mainLayout.setHeight("-1px");
+		mainLayout.setWidth("100%");
+		mainLayout.setHeight("100%");
 		mainLayout.setMargin(true);
 		mainLayout.setSpacing(true);
 		
 		// top-level component properties
-		this.setWidth("-1px");
-		this.setHeight("-1px");
+		this.setWidth("100%");
+		this.setHeight("100%");
 		
 		// panelLogin
 		panelLogin = buildPanelLogin();
 		mainLayout.addComponent(panelLogin);
-		mainLayout.setComponentAlignment(panelLogin, new Alignment(20));
+		
+		mainLayout.setComponentAlignment(panelLogin, Alignment.MIDDLE_CENTER);
 		
 		return mainLayout;
 	}
