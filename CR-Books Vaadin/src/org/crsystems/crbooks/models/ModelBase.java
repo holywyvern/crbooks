@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.crsystems.crbooks.application.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
 
 
 public abstract class ModelBase<T, PK extends Serializable> implements IDatabaseModel<T, PK> {
@@ -135,5 +137,27 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 	}
 	
 	public abstract String getTableName();
+	
+	@SuppressWarnings("unchecked")
+	public static <D>  List<? extends D> getByCriterion(Class<D> klass, Criterion ... crits) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			Criteria criteria = session.createCriteria(klass);
+			for (Criterion c : crits) {
+				criteria.add(c);
+			}
+			List<? extends D> list = (List<? extends D>) criteria.list();
+			transaction.commit();
+			return list;
+		} catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();	
+		} finally {
+			session.close();
+		}		
+		return null;
+	}
 	
 }

@@ -14,12 +14,12 @@ import javax.persistence.Table;
 public class User extends ModelBase<User, String> {
 	
 	private enum Role {
-		USER,
+		CLIENT,
 		MANAGER,
 		ADMIN;
 	}
 	
-	public static final Role USER_ROLE = Role.USER;
+	public static final Role CLIENT_ROLE = Role.CLIENT;
 	public static final Role MANAGER_ROLE = Role.MANAGER;
 	public static final Role ADMIN_ROLE = Role.ADMIN;
 	
@@ -142,8 +142,8 @@ public class User extends ModelBase<User, String> {
 		this.role = role;
 	}
 	
-	public boolean isUser() {
-		return (this.role == Role.USER);
+	public boolean isClient() {
+		return (this.role == Role.CLIENT);
 	}
 	
 	public boolean isManager() {
