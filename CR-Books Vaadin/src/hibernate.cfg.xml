@@ -4,12 +4,16 @@
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
+    
+    	<!-- Properties -->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">crbooks</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost/crbooks</property>
         <property name="hibernate.connection.username">crbooks</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-	    <mapping package="org.crsystems.crbooks.models"/>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+	    
+	    <!-- Mapped classes -->
    		<mapping class="org.crsystems.crbooks.models.Author"/>
     	<mapping class="org.crsystems.crbooks.models.Book"/>  
     	<mapping class="org.crsystems.crbooks.models.BookCategory"/>  

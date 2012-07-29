@@ -1,6 +1,7 @@
 package org.crsystems.crbooks.application;
 
 import org.crsystems.crbooks.application.listeners.LoginListener;
+import org.crsystems.crbooks.models.User;
 import org.crsystems.crbooks.sessions.Session;
 import org.crsystems.crbooks.ui.layouts.ApplicationLayout;
 import org.crsystems.crbooks.ui.windows.HomeWindow;
@@ -33,6 +34,7 @@ public class CRBooks extends Application {
 		CRBooks.setInstance(this);
 		CRBooks.setView(new HomeWindow());
 		setMainWindow(mainWindow);
+		CRBooks.instance = this;
 	}
 
 	public static CRBooks getInstance() {
@@ -44,7 +46,7 @@ public class CRBooks extends Application {
 	}
 
 	public static Window mainWindow() {
-		return CRBooks.getInstance().getMainWindow();
+		return CRBooks.instance.getMainWindow();
 	}
 	
 	public static void showWarning(String caption) {
@@ -63,13 +65,22 @@ public class CRBooks extends Application {
 		mainWindow().showNotification(caption, Notification.TYPE_TRAY_NOTIFICATION);
 	}	
 	
-	public static Session getCurrentUser() {
+	public static Session getCurrentSession() {
 		return CRBooks.currentSession;
 	}
 
+	public static User getCurrentUser() {
+		return CRBooks.currentSession.getUser();
+	}	
+	
+	public static void setCurrentSession(Session session) {
+		CRBooks.currentSession = session;
+		CRBooks.getInstance().makeMenuCommands();
+	}	
+	
 	public static boolean authenticateUser(LoginListener onRegister) {
 		if (CRBooks.userSignedIn()) return true;
-		CRBooks.setView(new LoginWindow());
+		CRBooks.setView(new LoginWindow(onRegister));
 		return false;
 	}	
 	
@@ -112,6 +123,10 @@ public class CRBooks extends Application {
 	public static void returnView() {
 		setView(lastView);
 		
+	}
+
+	public void makeMenuCommands() {
+		layout.makeMenuCommands();
 	}
 	
 }

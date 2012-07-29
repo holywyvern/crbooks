@@ -6,7 +6,6 @@ public class AdminSession extends Session {
 
 	public AdminSession(User user) {
 		super(user);
-		// TODO Auto-generated constructor stub
 	}
 
 }

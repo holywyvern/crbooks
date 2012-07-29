@@ -3,6 +3,7 @@ package org.crsystems.crbooks.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.crsystems.crbooks.application.HibernateUtil;
 import org.hibernate.Criteria;
@@ -101,13 +102,13 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 	}
 	
 	@SuppressWarnings("unchecked")
-	public T getByID(PK key) {
+	public static <K, PK extends Serializable> K getByID(Class<K> tclass, Class<PK> pkclass, PK key) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Object o = null;
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			o = session.get(getClass(), key);
+			o = session.get(tclass, key);
 			transaction.commit();
 		} catch (HibernateException e) {
             transaction.rollback();
@@ -115,7 +116,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 		} finally {
             session.close();
         }		
-		return (T)o;
+		return (K)o;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -159,5 +160,8 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 		}		
 		return null;
 	}
+	
+	public abstract boolean isValid();
+	public abstract Map<String, String> getErrorFields();
 	
 }

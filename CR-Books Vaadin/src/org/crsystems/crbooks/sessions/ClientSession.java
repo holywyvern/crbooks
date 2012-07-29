@@ -2,9 +2,9 @@ package org.crsystems.crbooks.sessions;
 
 import org.crsystems.crbooks.models.User;
 
-public class UserSession extends Session {
+public class ClientSession extends Session {
 
-	public UserSession(User user) {
+	public ClientSession(User user) {
 		super(user);
 		// TODO Auto-generated constructor stub
 	}

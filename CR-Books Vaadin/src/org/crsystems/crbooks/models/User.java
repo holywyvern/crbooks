@@ -1,13 +1,20 @@
 package org.crsystems.crbooks.models;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.crsystems.crbooks.sessions.*;
 
 @Entity
 @Table(name="Users")
@@ -47,7 +54,7 @@ public class User extends ModelBase<User, String> {
 	@Basic
 	private Role role;
 	
-	@OneToMany(mappedBy="Orders")
+	@OneToMany(mappedBy="orderID")
 	private List<Order> orders;
 	
 	public User() {
@@ -169,6 +176,77 @@ public class User extends ModelBase<User, String> {
 	@Override
 	public String getTableName() {
 		return "Users";
+	}
+
+	
+	public boolean isValid(boolean updating) {
+		if (this.getEmail() == null) return false;
+		
+		Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+		Matcher m = p.matcher(this.getEmail());
+		
+		if (!m.matches()) return false;			
+		if (!updating) {
+			if (User.emailExists(this.getEmail())) return false;
+		}
+		if (this.getPassword() != null && this.getPassword().length() < 6) return false;
+	
+		return true;
+	}
+
+	private static boolean emailExists(String email) {
+		return (User.getByID(email) != null);
+	}
+
+	@Override
+	public boolean isValid() {
+		return isValid(true);
+	}
+	
+	public Map<String, String> getErrorFields(boolean updating) {
+		Map<String, String> map = new HashMap<String, String>();
+		
+		if (this.getEmail() == null) { 
+			map.put("email", "La dirección de correo electronico no puede estar en blanco.");
+		} else {
+			Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+			Matcher m = p.matcher(this.getEmail());			
+			if (!m.matches()) 
+				map.put("email", "La dirección de correo electronico válida.");			
+		}
+		if (!updating) {
+			if (User.emailExists(this.getEmail())) 
+				map.put("email", "Ya existe una cuenta asociada a esa dirección de correo electrónico.");	
+		}
+		if (this.getPassword() != null && this.getPassword().length() < 6)
+			map.put("password", "La contraseña debe de tener al menos 6 caracteres.");	
+		return map;
+	}
+
+	@Override
+	public Map<String, String> getErrorFields() {
+		return getErrorFields(true);
+	}
+
+	public Session createSession() {
+		Session session = null;
+		switch (this.role) {
+		case CLIENT:
+			session = new ClientSession(this);
+			break;
+		case MANAGER:
+			session = new ManagerSession(this);
+			break;
+		case ADMIN:
+			session = new AdminSession(this);
+			break;
+		}
+		return session;
+	}
+
+	public static User getByID(String key) {
+		User u = ModelBase.getByID(User.class, String.class, key);
+		return u;
 	}
 	
 }

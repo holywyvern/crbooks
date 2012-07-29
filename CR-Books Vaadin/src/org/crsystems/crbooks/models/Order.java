@@ -2,9 +2,11 @@ package org.crsystems.crbooks.models;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,7 +24,7 @@ public class Order extends ModelBase<Order, Integer> {
 	@GeneratedValue	
 	private Integer orderID;
 	
-	@OneToMany(mappedBy="OrderItems")
+	@OneToMany(mappedBy="orderItemID")
 	private List<OrderItem> items;
 	
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
@@ -51,6 +53,18 @@ public class Order extends ModelBase<Order, Integer> {
 	@Override
 	public String getTableName() {
 		return "Orders";
+	}
+
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Map<String, String> getErrorFields() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 	
 }

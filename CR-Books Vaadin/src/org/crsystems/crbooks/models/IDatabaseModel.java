@@ -9,7 +9,6 @@ public interface IDatabaseModel<T, PK extends Serializable> {
 	public boolean update();
 	public boolean delete();
 	public boolean saveOrUpdate();
-	public T getByID(PK key);
 	
 	public List<T> getAll();
 	

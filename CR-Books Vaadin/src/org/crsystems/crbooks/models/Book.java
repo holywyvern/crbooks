@@ -1,6 +1,7 @@
 package org.crsystems.crbooks.models;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -58,6 +59,23 @@ public class Book extends ModelBase<Book, Integer> {
 
 	public void setAuthor(Author author) {
 		this.author = author;
+	}
+
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Map<String, String> getErrorFields() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Book getByID(Integer key) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 	
 	

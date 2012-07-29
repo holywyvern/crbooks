@@ -1,5 +1,9 @@
 package org.crsystems.crbooks.ui.windows;
 
+import org.crsystems.crbooks.application.CRBooks;
+import org.crsystems.crbooks.application.listeners.LoginListener;
+import org.crsystems.crbooks.models.User;
+
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -29,11 +33,13 @@ public class LoginWindow extends CustomComponent {
 	private Label labelPassword;
 	private TextField textEmail;
 	private Label labelEmail;
+	private LoginListener onRegister;
 
-	public LoginWindow() {
+	public LoginWindow(LoginListener onRegister) {
 		this.buildMainLayout();
 		this.setCompositionRoot(mainLayout);
 		this.makeListeners();
+		this.onRegister = onRegister;
 	}
 
 	
@@ -56,12 +62,25 @@ public class LoginWindow extends CustomComponent {
 
 
 	protected void onLoginButton() {
-		// TODO Auto-generated method stub
+		User user = getLoggedUser();
+		if (user != null) {
+			CRBooks.setCurrentSession(user.createSession());
+			this.onRegister.onLoginSuccesfull();
+		} else {
+			CRBooks.showError("La dirección de correo electrónico o la contraseña no es válida.");
+		}
 	}
 
+	private User getLoggedUser() {
+		User user = User.getByID(this.textEmail.getValue().toString());
+		if (user == null) return null;
+		if (!user.getPassword().equals(this.textPassword.getValue())) return null;
+		return user;
+	}
+
+
 	protected void onRegisterButton() {
-		// TODO Auto-generated method stub
-		
+		CRBooks.setView(new RegisterWindow());
 	}
 	
 	
