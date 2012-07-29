@@ -11,9 +11,6 @@ public class HibernateUtil {
 	    private static ServiceRegistry serviceRegistry;
 	    
 	    static {
-	    	System.out.println("========================================");
-	    	System.out.println("Configuring hibernate");
-	    	System.out.println("----------------------------------------");
 	        try {      
 	        	Configuration configuration = new Configuration();
 	            configuration.configure();
@@ -24,14 +21,10 @@ public class HibernateUtil {
 	                + e.getMessage());
 	            throw new ExceptionInInitializerError(e);
 	        }
-	        System.out.println("========================================");
 	    }
 	    
 	    public static SessionFactory getSessionFactory() {
 	    	if (sessionFactory == null) {
-		    	System.out.println("========================================");
-		    	System.out.println("Configuring hibernate");
-		    	System.out.println("----------------------------------------");
 		        try {      
 		        	Configuration configuration = new Configuration();
 		            configuration.configure();
@@ -41,8 +34,7 @@ public class HibernateUtil {
 		            System.err.println("Error in creating SessionFactory object." 
 		                + e.getMessage());
 		            throw new ExceptionInInitializerError(e);
-		        }
-		        System.out.println("========================================");	    		
+		        }		
 	    	}
 	        return sessionFactory;
 	    }	    

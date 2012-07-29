@@ -1,5 +1,6 @@
 package org.crsystems.crbooks.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -27,12 +28,15 @@ public class Order extends ModelBase<Order, Integer> {
 	@OneToMany(mappedBy="orderItemID")
 	private List<OrderItem> items;
 	
-	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	private Order order;
 	
 	@Basic
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
+	
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+	private OrderState state;
 	
 	public Integer getOrderID() {
 		return orderID;
@@ -65,6 +69,58 @@ public class Order extends ModelBase<Order, Integer> {
 	public Map<String, String> getErrorFields() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public OrderState getState() {
+		return state;
+	}
+
+	public void setState(OrderState state) {
+		this.state = state;
+	}
+
+	public List<OrderItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<OrderItem> items) {
+		this.items = items;
 	}	
+	
+	public Double getTotalPrice() {
+		List<OrderItem> items = getItems();
+		Double totalPrice = 0.0;
+		if (items == null) return 0.0;
+		for (OrderItem item : items) {
+			totalPrice = totalPrice + item.price();
+		}
+		return totalPrice;
+	}
+	public void addItem(OrderItem item) {
+		List<OrderItem> list = this.getItems();
+		if (list == null) {
+			list = new ArrayList<OrderItem>();
+			this.setItems(list);
+		}
+		boolean addedToOther = false;
+		for (OrderItem i : list) {
+			if (i.getBook().getBookID() == item.getBook().getBookID()) {
+				addedToOther = true;
+				i.setAmount(item.getAmount() + i.getAmount());
+			}
+		}
+		if (!addedToOther) {
+			list.add(item);
+		}
+	}
+	
 	
 }

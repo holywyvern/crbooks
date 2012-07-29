@@ -91,6 +91,10 @@ public class OrderItem extends ModelBase<OrderItem, Integer> {
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	public Double price() {
+		return this.getAmount() * this.getBook().getPrice();
 	}	
 	
 }

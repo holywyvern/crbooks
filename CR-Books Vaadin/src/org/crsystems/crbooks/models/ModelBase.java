@@ -15,7 +15,7 @@ import org.hibernate.criterion.Criterion;
 
 
 public abstract class ModelBase<T, PK extends Serializable> implements IDatabaseModel<T, PK> {
-
+	
 	public ModelBase() {
 		
 	}
@@ -120,13 +120,13 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T> getAll() {
+	public static <T, PK> List<T> getAll(Class<T> klass, Class<PK> pkclass, String tableName) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 		List<T> list = null;
 		try {
 			transaction = session.beginTransaction();
-			list = session.createQuery(String.format("from %s", getTableName())).list();
+			list = session.createQuery(String.format("from %s", tableName)).list();
 			transaction.commit();
 		} catch (HibernateException e) {
 			if (transaction != null) transaction.rollback();
@@ -137,7 +137,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 		return list;	
 	}
 	
-	public abstract String getTableName();
+	protected abstract String getTableName();
 	
 	@SuppressWarnings("unchecked")
 	public static <D>  List<? extends D> getByCriterion(Class<D> klass, Criterion ... crits) {

@@ -27,6 +27,20 @@ public class Book extends ModelBase<Book, Integer> {
 	@ManyToOne
 	private Author author;
 	
+	@ManyToOne
+	private Publisher publisher;	
+	
+	@Basic
+	private Integer stock;
+	
+	@Basic
+	private String description;
+	
+	@Basic
+	private Integer edition;
+	
+	@Basic
+	private Double price;
 	
 	@ManyToMany
 	private List<BookCategory> categories;
@@ -76,6 +90,54 @@ public class Book extends ModelBase<Book, Integer> {
 	public static Book getByID(Integer key) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Integer getStock() {
+		return stock;
+	}
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getEdition() {
+		return edition;
+	}
+
+	public void setEdition(Integer edition) {
+		this.edition = edition;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public List<BookCategory> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<BookCategory> categories) {
+		this.categories = categories;
+	}
+
+	public Publisher getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
 	}	
 	
 	

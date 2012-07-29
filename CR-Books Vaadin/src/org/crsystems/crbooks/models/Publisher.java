@@ -7,34 +7,25 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="BookCategories")
-public class BookCategory extends ModelBase<BookCategory, Integer>  {
+@Table(name="Publishers")
+public class Publisher extends ModelBase<Publisher, String> {
 
 	@Id
-	@GeneratedValue	
-	private Integer bookCategoryID;
-
-	@Basic
 	private String name;
 	
 	@Basic
 	private String description;
 	
-	public Integer getBookCategoryID() {
-		return bookCategoryID;
-	}
-
-	public void setBookCategoryID(Integer bookCategoryID) {
-		this.bookCategoryID = bookCategoryID;
-	}
-
+	@OneToMany(mappedBy="bookID")
+	private List<Book> books;
+	
 	@Override
 	public String getTableName() {
-		// TODO Auto-generated method stub
-		return "BookCategories";
+		return "Publishers";
 	}
 
 	@Override
@@ -65,8 +56,16 @@ public class BookCategory extends ModelBase<BookCategory, Integer>  {
 		this.description = description;
 	}
 
-	public static List<BookCategory> getAll() {
-		return ModelBase.getAll(BookCategory.class, Integer.class, "BookCategory");
-	}	
-	
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
+	public static List<Publisher> getAll() {
+		return ModelBase.getAll(Publisher.class, String.class, "Publisher");
+	}
+
 }

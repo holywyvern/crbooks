@@ -16,9 +16,12 @@
 	    <!-- Mapped classes -->
    		<mapping class="org.crsystems.crbooks.models.Author"/>
     	<mapping class="org.crsystems.crbooks.models.Book"/>  
-    	<mapping class="org.crsystems.crbooks.models.BookCategory"/>  
+    	<mapping class="org.crsystems.crbooks.models.BookCategory"/>
     	<mapping class="org.crsystems.crbooks.models.Order"/>  
     	<mapping class="org.crsystems.crbooks.models.OrderItem"/>  
+    	<mapping class="org.crsystems.crbooks.models.OrderState"/> 
+    	<mapping class="org.crsystems.crbooks.models.Publisher"/>     
     	<mapping class="org.crsystems.crbooks.models.User"/>   
+    	
     </session-factory>
 </hibernate-configuration>
