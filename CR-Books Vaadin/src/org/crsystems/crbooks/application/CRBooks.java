@@ -75,7 +75,8 @@ public class CRBooks extends Application {
 	
 	public static void setCurrentSession(Session session) {
 		CRBooks.currentSession = session;
-		CRBooks.getInstance().makeMenuCommands();
+		if (CRBooks.instance != null) CRBooks.instance.makeMenuCommands();
+		CRBooks.setView(new HomeWindow());
 	}	
 	
 	public static boolean authenticateUser(LoginListener onRegister) {
