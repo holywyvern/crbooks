@@ -73,7 +73,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
             transaction.commit();
             saved = true;
         } catch (HibernateException e) {
-            transaction.rollback();
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         } finally {
             session.close();
@@ -93,7 +93,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
             transaction.commit();
             saved = true;
         } catch (HibernateException e) {
-            transaction.rollback();
+        	if (transaction != null) transaction.rollback();
             e.printStackTrace();
         } finally {
             session.close();
@@ -111,7 +111,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 			o = session.get(tclass, key);
 			transaction.commit();
 		} catch (HibernateException e) {
-            transaction.rollback();
+			if (transaction != null) transaction.rollback();
             e.printStackTrace();	
 		} finally {
             session.close();
@@ -129,7 +129,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 			list = session.createQuery(String.format("from %s", getTableName())).list();
 			transaction.commit();
 		} catch (HibernateException e) {
-            transaction.rollback();
+			if (transaction != null) transaction.rollback();
             e.printStackTrace();	
 		} finally {
             session.close();
@@ -153,7 +153,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 			transaction.commit();
 			return list;
 		} catch (HibernateException e) {
-            transaction.rollback();
+			if (transaction != null) transaction.rollback();
             e.printStackTrace();	
 		} finally {
 			session.close();
