@@ -1,5 +1,6 @@
 package org.crsystems.crbooks.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,15 +11,19 @@ import java.util.regex.Pattern;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.crsystems.crbooks.sessions.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 @Entity
 @Table(name="Users")
-public class User extends ModelBase<User, String> {
+public class User extends ModelBase<User, Integer> {
 	
 	private enum Role {
 		CLIENT,
@@ -31,6 +36,11 @@ public class User extends ModelBase<User, String> {
 	public static final Role ADMIN_ROLE = Role.ADMIN;
 	
 	@Id
+	@GenericGenerator(name="generator", strategy="increment")
+    @GeneratedValue(generator="generator")
+	private Integer userID;
+	
+	@Basic
 	private String email;
 	
 	@Basic
@@ -195,7 +205,7 @@ public class User extends ModelBase<User, String> {
 	}
 
 	private static boolean emailExists(String email) {
-		return (User.getByID(email) != null);
+		return (User.getByEmail(email) != null);
 	}
 
 	@Override
@@ -244,9 +254,31 @@ public class User extends ModelBase<User, String> {
 		return session;
 	}
 
-	public static User getByID(String key) {
-		User u = ModelBase.getByID(User.class, String.class, key);
+	public static User getByID(Integer key) {
+		User u = ModelBase.getByID(User.class, Integer.class, key);
 		return u;
+	}
+
+	public static User getByEmail(String email) {
+		Criterion c = Restrictions.eq("email", email);
+		List<User> list = ModelBase.getByCriterion(User.class, c);
+		return (list == null) ? null : ((list.size() > 0) ? list.get(0) : null) ;
+	}
+	
+	public Integer getUserID() {
+		return userID;
+	}
+
+	public void setUserID(Integer userID) {
+		this.userID = userID;
+	}
+
+	public static List<User> getByFullName(String name) {
+		Criterion c = Restrictions.or(Restrictions.like("firstName", name),
+				                    Restrictions.like("lastName", name));
+		List<User> list = ModelBase.getByCriterion(User.class, c);
+		if (list == null) list = new ArrayList<User>();
+		return list;
 	}
 	
 }

@@ -72,7 +72,7 @@ public class LoginWindow extends CustomComponent {
 	}
 
 	private User getLoggedUser() {
-		User user = User.getByID(this.textEmail.getValue().toString());
+		User user = User.getByEmail(this.textEmail.getValue().toString());
 		if (user == null) return null;
 		if (!user.getPassword().equals(this.textPassword.getValue())) return null;
 		return user;

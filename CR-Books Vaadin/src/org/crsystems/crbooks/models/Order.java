@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.Expression;
+
 @Entity
 @Table(name="Orders")
 public class Order extends ModelBase<Order, Integer> {
@@ -34,7 +34,7 @@ public class Order extends ModelBase<Order, Integer> {
 	private List<OrderItem> items;
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-	private Order order;
+	private User user;
 	
 	@Basic
 	@Temporal(TemporalType.DATE)
@@ -51,14 +51,6 @@ public class Order extends ModelBase<Order, Integer> {
 		this.orderID = orderID;
 	}
 
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}	
-	
 	@Override
 	public String getTableName() {
 		return "Orders";
@@ -131,17 +123,17 @@ public class Order extends ModelBase<Order, Integer> {
 	}	
 	
 	
-	public static List<Order> getByAuthor(Author author) {
-		Criterion c = Restrictions.eq("authorID", author.getAuthorID());
+	public static List<Order> getByUser(User user) {
+		Criterion c = Restrictions.eq("userID", user.getUserID());
 		List<Order> list = ModelBase.getByCriterion(Order.class, c);
 		if (list == null) list = new ArrayList<Order>();
 		return list;
 	}
 	
-	public static List<Order> getByAuthor(List<Author> authors) {
+	public static List<Order> getByUser(List<User> users) {
 		List<Order> list = new ArrayList<Order>();
-		for (Author author : authors) {
-			list.addAll(Order.getByAuthor(author));
+		for (User user : users) {
+			list.addAll(Order.getByUser(user));
 		}
 		return list;
 	}
@@ -154,27 +146,35 @@ public class Order extends ModelBase<Order, Integer> {
 		return list;
 	}
 	
-	public static List<Order> getBetweenDatesAndAuthor(Date startDate, Date endDate, Author author) {
+	public static List<Order> getBetweenDatesAndUser(Date startDate, Date endDate, User user) {
 		Criterion c = Restrictions.and(Restrictions.le("createdAt", endDate),
 				                       Restrictions.ge("createdAt", startDate),
-				                       Restrictions.eq("authorID", author.getAuthorID()));
+				                       Restrictions.eq("userID", user.getUserID()));
 		List<Order> list = ModelBase.getByCriterion(Order.class, c);
 		if (list == null) list = new ArrayList<Order>();
 		return list;
 	}
 	
-	public static List<Order> getBetweenDatesAndAuthorName(Date startDate, Date endDate, String authorName) {
-		List<Author> authorList = Author.getByFullName(authorName);
+	public static List<Order> getBetweenDatesAndUserName(Date startDate, Date endDate, String username) {
+		List<User> userList = User.getByFullName(username);
 		List<Order> orders = new ArrayList<Order>();
-		for (Author author : authorList) {
+		for (User user : userList) {
 			Criterion c = Restrictions.and(Restrictions.le("createdAt", endDate),
 					                       Restrictions.ge("createdAt", startDate),
-				                           Restrictions.eq("authorID", author.getAuthorID()));
+				                           Restrictions.eq("userID", user.getUserID()));
 			List<Order> list = ModelBase.getByCriterion(Order.class, c);
 			if (list == null) list = new ArrayList<Order>();
 			orders.addAll(list);
 		}
 		return orders;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}	
 	
 }

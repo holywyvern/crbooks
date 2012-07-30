@@ -99,10 +99,9 @@ public class Author extends ModelBase<Author, Integer> {
 		}
 		return super.equals(other);
 	}
-	
-	public static List<Author> getByFullName(String name) {
-		Criterion c = Restrictions.or(Restrictions.like("firstName", name),
-					  Restrictions.like("lastName", name));
+
+	public static List<Author> getByName(String name) {
+		Criterion c = Restrictions.like("name", name);
 		List<Author> list = ModelBase.getByCriterion(Author.class, c);
 		if (list == null) list = new ArrayList<Author>();
 		return list;
