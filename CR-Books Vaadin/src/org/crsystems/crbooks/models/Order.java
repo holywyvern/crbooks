@@ -18,7 +18,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
-
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Expression;
 @Entity
 @Table(name="Orders")
 public class Order extends ModelBase<Order, Integer> {
@@ -128,5 +130,51 @@ public class Order extends ModelBase<Order, Integer> {
 		return ModelBase.getAll(Order.class, Integer.class, "Order");
 	}	
 	
+	
+	public static List<Order> getByAuthor(Author author) {
+		Criterion c = Restrictions.eq("authorID", author.getAuthorID());
+		List<Order> list = ModelBase.getByCriterion(Order.class, c);
+		if (list == null) list = new ArrayList<Order>();
+		return list;
+	}
+	
+	public static List<Order> getByAuthor(List<Author> authors) {
+		List<Order> list = new ArrayList<Order>();
+		for (Author author : authors) {
+			list.addAll(Order.getByAuthor(author));
+		}
+		return list;
+	}
+	
+	public static List<Order> getBetweenDates(Date startDate, Date endDate) {
+		Criterion c = Restrictions.and(Restrictions.le("createdAt", endDate),
+									   Restrictions.ge("createdAt", startDate));
+		List<Order> list = ModelBase.getByCriterion(Order.class, c);
+		if (list == null) list = new ArrayList<Order>();
+		return list;
+	}
+	
+	public static List<Order> getBetweenDatesAndAuthor(Date startDate, Date endDate, Author author) {
+		Criterion c = Restrictions.and(Restrictions.le("createdAt", endDate),
+				                       Restrictions.ge("createdAt", startDate),
+				                       Restrictions.eq("authorID", author.getAuthorID()));
+		List<Order> list = ModelBase.getByCriterion(Order.class, c);
+		if (list == null) list = new ArrayList<Order>();
+		return list;
+	}
+	
+	public static List<Order> getBetweenDatesAndAuthorName(Date startDate, Date endDate, String authorName) {
+		List<Author> authorList = Author.getByFullName(authorName);
+		List<Order> orders = new ArrayList<Order>();
+		for (Author author : authorList) {
+			Criterion c = Restrictions.and(Restrictions.le("createdAt", endDate),
+					                       Restrictions.ge("createdAt", startDate),
+				                           Restrictions.eq("authorID", author.getAuthorID()));
+			List<Order> list = ModelBase.getByCriterion(Order.class, c);
+			if (list == null) list = new ArrayList<Order>();
+			orders.addAll(list);
+		}
+		return orders;
+	}	
 	
 }

@@ -14,6 +14,7 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -37,7 +38,7 @@ public class NewBookWindow extends CustomComponent {
 	private Label labelCategories;
 	private TextField textPrice;
 	private Label labelPrice;
-	private TextField textDescription;
+	private TextArea textDescription;
 	private Label labelDescription;
 	private TextField textEdition;
 	private Label labelEdition;
@@ -247,7 +248,7 @@ public class NewBookWindow extends CustomComponent {
 		// comboAuthor
 		comboAuthor = new ComboBox();
 		comboAuthor.setImmediate(true);
-		comboAuthor.setWidth("-1px");
+		comboAuthor.setWidth("100%");
 		comboAuthor.setHeight("-1px");
 		comboAuthor.setInvalidAllowed(false);
 		comboAuthor.setWriteThrough(false);
@@ -264,7 +265,7 @@ public class NewBookWindow extends CustomComponent {
 		// comboPublisher
 		comboPublisher = new ComboBox();
 		comboPublisher.setImmediate(true);
-		comboPublisher.setWidth("-1px");
+		comboPublisher.setWidth("100%");
 		comboPublisher.setHeight("-1px");
 		comboPublisher.setInvalidAllowed(false);
 		comboPublisher.setWriteThrough(false);
@@ -283,7 +284,6 @@ public class NewBookWindow extends CustomComponent {
 		textEdition.setImmediate(true);
 		textEdition.setWidth("100.0%");
 		textEdition.setHeight("-1px");
-		textEdition.setSecret(false);
 		gridFormParams.addComponent(textEdition, 1, 3);
 		
 		// labelDescription
@@ -295,11 +295,11 @@ public class NewBookWindow extends CustomComponent {
 		gridFormParams.addComponent(labelDescription, 0, 4);
 		
 		// textDescription
-		textDescription = new TextField();
+		textDescription = new TextArea();
 		textDescription.setImmediate(true);
-		textDescription.setWidth("100.0%");
+		textDescription.setWidth("320px");
 		textDescription.setHeight("-1px");
-		textDescription.setSecret(false);
+		textDescription.setRows(5);
 		gridFormParams.addComponent(textDescription, 1, 4);
 		
 		// labelPrice
@@ -315,7 +315,6 @@ public class NewBookWindow extends CustomComponent {
 		textPrice.setImmediate(true);
 		textPrice.setWidth("100.0%");
 		textPrice.setHeight("-1px");
-		textPrice.setSecret(false);
 		gridFormParams.addComponent(textPrice, 1, 5);
 		
 		// labelCategories
@@ -346,7 +345,6 @@ public class NewBookWindow extends CustomComponent {
 		textStock.setImmediate(true);
 		textStock.setWidth("100.0%");
 		textStock.setHeight("-1px");
-		textStock.setSecret(false);
 		gridFormParams.addComponent(textStock, 1, 7);
 		
 		// buttonForm

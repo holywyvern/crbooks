@@ -39,8 +39,7 @@ public class ViewPublishersWindow extends ViewBaseWindow<Publisher, Integer> {
 
 	@Override
 	protected EditBaseWindow<Publisher> createEditWindow() {
-		// TODO Auto-generated method stub
-		return null;
+		return new EditPublisherWindow();
 	}
 
 }

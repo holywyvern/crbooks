@@ -85,4 +85,8 @@ public class Publisher extends ModelBase<Publisher, Integer> {
 		this.publisherID = publisherID;
 	}
 
+	public static Publisher getByID(Integer key) {
+		return ModelBase.getByID(Publisher.class, Integer.class, key);
+	}
+
 }

@@ -185,7 +185,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 	protected abstract String getTableName();
 	
 	@SuppressWarnings("unchecked")
-	public static <D>  List<? extends D> getByCriterion(Class<D> klass, Criterion ... crits) {
+	public static <D>  List<D> getByCriterion(Class<D> klass, Criterion ... crits) {
 		Session session = null;
 		if (CRBooks.getCurrentSession() != null) {
 			if (CRBooks.getCurrentSession().getSession() == null) {
@@ -203,7 +203,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 			for (Criterion c : crits) {
 				criteria.add(c);
 			}
-			List<? extends D> list = (List<? extends D>) criteria.list();
+			List<D> list = (List<D>) criteria.list();
 			transaction.commit();
 			return list;
 		} catch (HibernateException e) {

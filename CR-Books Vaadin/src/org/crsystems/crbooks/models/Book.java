@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -39,7 +41,7 @@ public class Book extends ModelBase<Book, Integer> {
 	@Basic
 	private Integer stock;
 	
-	@Basic
+	@Lob
 	private String description;
 	
 	@Basic

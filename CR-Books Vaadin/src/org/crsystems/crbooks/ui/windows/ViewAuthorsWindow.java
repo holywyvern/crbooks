@@ -18,7 +18,7 @@ public class ViewAuthorsWindow extends ViewBaseWindow<Author, Integer> {
 
 	@Override
 	protected EditBaseWindow<Author> createEditWindow() {
-		return null;
+		return new EditAuthorWindow();
 	}
 
 	@Override

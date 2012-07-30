@@ -21,6 +21,7 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -38,7 +39,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 	private Label labelCategories;
 	private TextField textPrice;
 	private Label labelPrice;
-	private TextField textDescription;
+	private TextArea textDescription;
 	private Label labelDescription;
 	private TextField textEdition;
 	private Label labelEdition;
@@ -154,7 +155,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 	private VerticalLayout buildMainLayout() {
 		// common part: create layout
 		mainLayout = new VerticalLayout();
-		mainLayout.setImmediate(false);
+		mainLayout.setImmediate(true);
 		mainLayout.setWidth("100%");
 		mainLayout.setHeight("-1px");
 		mainLayout.setMargin(false);
@@ -176,7 +177,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 	private Panel buildPanelForm() {
 		// common part: create layout
 		panelForm = new Panel();
-		panelForm.setImmediate(false);
+		panelForm.setImmediate(true);
 		panelForm.setWidth("-1px");
 		panelForm.setHeight("-1px");
 		
@@ -191,7 +192,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 	private VerticalLayout buildGridForm() {
 		// common part: create layout
 		gridForm = new VerticalLayout();
-		gridForm.setImmediate(false);
+		gridForm.setImmediate(true);
 		gridForm.setWidth("100.0%");
 		gridForm.setHeight("100.0%");
 		gridForm.setMargin(true);
@@ -199,10 +200,10 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// labelFormHeader
 		labelFormHeader = new Label();
-		labelFormHeader.setImmediate(false);
+		labelFormHeader.setImmediate(true);
 		labelFormHeader.setWidth("-1px");
 		labelFormHeader.setHeight("-1px");
-		labelFormHeader.setValue("<h2>Editar el nuevo libro</h2>");
+		labelFormHeader.setValue("<h2>Editar Libro</h2>");
 		labelFormHeader.setContentMode(3);
 		gridForm.addComponent(labelFormHeader);
 		
@@ -217,7 +218,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 	private GridLayout buildGridFormParams() {
 		// common part: create layout
 		gridFormParams = new GridLayout();
-		gridFormParams.setImmediate(false);
+		gridFormParams.setImmediate(true);
 		gridFormParams.setWidth("-1px");
 		gridFormParams.setHeight("100.0%");
 		gridFormParams.setMargin(false);
@@ -227,7 +228,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// labelTitle
 		labelTitle = new Label();
-		labelTitle.setImmediate(false);
+		labelTitle.setImmediate(true);
 		labelTitle.setWidth("-1px");
 		labelTitle.setHeight("-1px");
 		labelTitle.setValue("Título:");
@@ -235,7 +236,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// textTitle
 		textTitle = new TextField();
-		textTitle.setImmediate(false);
+		textTitle.setImmediate(true);
 		textTitle.setWidth("100.0%");
 		textTitle.setHeight("-1px");
 		textTitle.setSecret(false);
@@ -243,7 +244,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// labelAuthor
 		labelAuthor = new Label();
-		labelAuthor.setImmediate(false);
+		labelAuthor.setImmediate(true);
 		labelAuthor.setWidth("-1px");
 		labelAuthor.setHeight("-1px");
 		labelAuthor.setValue("Autor:");
@@ -251,8 +252,8 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// comboAuthor
 		comboAuthor = new ComboBox();
-		comboAuthor.setImmediate(false);
-		comboAuthor.setWidth("-1px");
+		comboAuthor.setImmediate(true);
+		comboAuthor.setWidth("100%");
 		comboAuthor.setHeight("-1px");
 		comboAuthor.setInvalidAllowed(false);
 		comboAuthor.setWriteThrough(false);
@@ -260,7 +261,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// labelPublisher
 		labelPublisher = new Label();
-		labelPublisher.setImmediate(false);
+		labelPublisher.setImmediate(true);
 		labelPublisher.setWidth("-1px");
 		labelPublisher.setHeight("-1px");
 		labelPublisher.setValue("Editorial:");
@@ -268,8 +269,8 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// comboPublisher
 		comboPublisher = new ComboBox();
-		comboPublisher.setImmediate(false);
-		comboPublisher.setWidth("-1px");
+		comboPublisher.setImmediate(true);
+		comboPublisher.setWidth("100%");
 		comboPublisher.setHeight("-1px");
 		comboPublisher.setInvalidAllowed(false);
 		comboPublisher.setWriteThrough(false);
@@ -277,7 +278,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// labelEdition
 		labelEdition = new Label();
-		labelEdition.setImmediate(false);
+		labelEdition.setImmediate(true);
 		labelEdition.setWidth("-1px");
 		labelEdition.setHeight("-1px");
 		labelEdition.setValue("Edición:");
@@ -285,31 +286,30 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// textEdition
 		textEdition = new TextField();
-		textEdition.setImmediate(false);
+		textEdition.setImmediate(true);
 		textEdition.setWidth("100.0%");
 		textEdition.setHeight("-1px");
-		textEdition.setSecret(false);
 		gridFormParams.addComponent(textEdition, 1, 3);
 		
 		// labelDescription
 		labelDescription = new Label();
-		labelDescription.setImmediate(false);
+		labelDescription.setImmediate(true);
 		labelDescription.setWidth("-1px");
 		labelDescription.setHeight("-1px");
 		labelDescription.setValue("Descripción:");
 		gridFormParams.addComponent(labelDescription, 0, 4);
 		
 		// textDescription
-		textDescription = new TextField();
-		textDescription.setImmediate(false);
-		textDescription.setWidth("100.0%");
+		textDescription = new TextArea();
+		textDescription.setImmediate(true);
+		textDescription.setWidth("320px");
 		textDescription.setHeight("-1px");
-		textDescription.setSecret(false);
+		textDescription.setRows(5);
 		gridFormParams.addComponent(textDescription, 1, 4);
 		
 		// labelPrice
 		labelPrice = new Label();
-		labelPrice.setImmediate(false);
+		labelPrice.setImmediate(true);
 		labelPrice.setWidth("-1px");
 		labelPrice.setHeight("-1px");
 		labelPrice.setValue("Precio:");
@@ -317,15 +317,14 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// textPrice
 		textPrice = new TextField();
-		textPrice.setImmediate(false);
+		textPrice.setImmediate(true);
 		textPrice.setWidth("100.0%");
 		textPrice.setHeight("-1px");
-		textPrice.setSecret(false);
 		gridFormParams.addComponent(textPrice, 1, 5);
 		
 		// labelCategories
 		labelCategories = new Label();
-		labelCategories.setImmediate(false);
+		labelCategories.setImmediate(true);
 		labelCategories.setWidth("-1px");
 		labelCategories.setHeight("-1px");
 		labelCategories.setValue("Categorias:");
@@ -333,14 +332,14 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// optionCategories
 		optionCategories = new OptionGroup();
-		optionCategories.setImmediate(false);
+		optionCategories.setImmediate(true);
 		optionCategories.setWidth("100.0%");
 		optionCategories.setHeight("-1px");
 		gridFormParams.addComponent(optionCategories, 1, 6);
 		
 		// labelStock
 		labelStock = new Label();
-		labelStock.setImmediate(false);
+		labelStock.setImmediate(true);
 		labelStock.setWidth("-1px");
 		labelStock.setHeight("-1px");
 		labelStock.setValue("Cantidad en stock:");
@@ -348,16 +347,15 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		
 		// textStock
 		textStock = new TextField();
-		textStock.setImmediate(false);
+		textStock.setImmediate(true);
 		textStock.setWidth("100.0%");
 		textStock.setHeight("-1px");
-		textStock.setSecret(false);
 		gridFormParams.addComponent(textStock, 1, 7);
 		
 		// buttonForm
 		buttonForm = new Button();
-		buttonForm.setCaption("Editar Libro");
-		buttonForm.setImmediate(false);
+		buttonForm.setCaption("Crear Libro");
+		buttonForm.setImmediate(true);
 		buttonForm.setWidth("-1px");
 		buttonForm.setHeight("-1px");
 		gridFormParams.addComponent(buttonForm, 1, 8);
