@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 @Entity
 @Table(name="Books")
@@ -147,6 +149,10 @@ public class Book extends ModelBase<Book, Integer> {
 	public static List<Book> getAll() {
 		return ModelBase.getAll(Book.class, Integer.class, "Book");
 	}
+	
+	
+	
+	
 
 	public void addCategory(BookCategory c) {
 		if (this.categories == null) {

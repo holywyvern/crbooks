@@ -8,6 +8,7 @@ import org.crsystems.crbooks.ui.windows.HomeWindow;
 import org.crsystems.crbooks.ui.windows.LoginWindow;
 
 import com.vaadin.Application;
+import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Window.Notification;
 
@@ -34,6 +35,7 @@ public class CRBooks extends Application {
 		CRBooks.setInstance(this);
 		CRBooks.setView(new HomeWindow());
 		setMainWindow(mainWindow);
+		
 		CRBooks.instance = this;
 	}
 

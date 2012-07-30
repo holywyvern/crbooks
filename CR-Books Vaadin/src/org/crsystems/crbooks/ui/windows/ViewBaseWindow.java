@@ -12,6 +12,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -68,6 +69,7 @@ public abstract class ViewBaseWindow<T extends ModelBase<T, PK>, PK extends Seri
 	protected abstract List<T> getAllItems();
 	
 	protected abstract Object[] itemToTable(T item, boolean showEdit, boolean showDelete);
+	
 	
 	private VerticalLayout buildMainLayout() {
 		// common part: create layout
@@ -162,6 +164,23 @@ public abstract class ViewBaseWindow<T extends ModelBase<T, PK>, PK extends Seri
 		return buttonDelete;
 	}
 	
+///////////////////////////CLAUDIO VERIFICAR METODO/////////////////77
+	
+	private Button createOrderButton(T item) {
+		
+		Button buttonDelete = new Button("Pedir");
+		buttonDelete.setStyleName(BaseTheme.BUTTON_LINK);
+		buttonDelete.addListener(new ItemClickListener(item) {
+
+			public void buttonClick(ClickEvent event) {
+				onOrderButtonClick(itemEvt);
+			}
+
+			
+		});		
+		return buttonDelete;
+	
+	}
 	
 	protected HorizontalLayout createActionLayout(T item, boolean showEdit, boolean showDelete) {
 		HorizontalLayout l = new HorizontalLayout();
@@ -177,6 +196,20 @@ public abstract class ViewBaseWindow<T extends ModelBase<T, PK>, PK extends Seri
 		return l;
 	}
 	
+	///////////////////////////CLAUDIO VERIFICAR METODO/////////////////77
+	protected HorizontalLayout createActionLayout11(T item, boolean showOrder) {
+		
+		HorizontalLayout l = new HorizontalLayout();
+		
+		l.addComponent(createOrderButton(item));			
+		l.setSizeFull();
+	
+		return l;
+	}
+	
+	
+	
+
 	protected void onDeleteButtonClick(T item) {
 		this.tableData.removeItem(item);
 		if (item.delete()) {
@@ -184,8 +217,18 @@ public abstract class ViewBaseWindow<T extends ModelBase<T, PK>, PK extends Seri
 		}
 	}
 	
-	protected void onEditButtonClick(T item) {
+	protected void onEditButtonClick(T item) 
+	{
+		
 		
 	}
+	
+///////////////////////////CLAUDIO VERIFICAR METODO/////////////////77
+	private void onOrderButtonClick(T itemEvt)
+	{
+		
+		
+	}
+	
 	
 }

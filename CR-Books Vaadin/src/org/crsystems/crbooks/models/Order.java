@@ -124,6 +124,9 @@ public class Order extends ModelBase<Order, Integer> {
 			list.add(item);
 		}
 	}
+	public static List<Order> getAll() {
+		return ModelBase.getAll(Order.class, Integer.class, "Order");
+	}	
 	
 	
 }
