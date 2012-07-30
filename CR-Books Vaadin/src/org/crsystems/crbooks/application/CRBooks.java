@@ -11,6 +11,7 @@ import com.vaadin.Application;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Window.Notification;
+import com.vaadin.terminal.gwt.server.WebApplicationContext;
 
 public class CRBooks extends Application {
 	
@@ -27,6 +28,7 @@ public class CRBooks extends Application {
 	@Override
 	public void init() {
 		CRBooks.currentSession = null;
+		setLocale(((WebApplicationContext)getContext()).getBrowser().getLocale());
 		this.setTheme("cr-books");
 		Window mainWindow = new Window("CR-Books");
 		layout = new ApplicationLayout();
@@ -76,7 +78,9 @@ public class CRBooks extends Application {
 	}	
 	
 	public static void setCurrentSession(Session session) {
+		if (CRBooks.currentSession != null) CRBooks.currentSession.close();
 		CRBooks.currentSession = session;
+		CRBooks.currentSession.setSession(HibernateUtil.getSessionFactory().openSession());
 		if (CRBooks.instance != null) CRBooks.instance.makeMenuCommands();
 		CRBooks.setView(new HomeWindow());
 	}	

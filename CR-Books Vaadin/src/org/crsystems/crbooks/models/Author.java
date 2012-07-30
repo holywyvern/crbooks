@@ -90,4 +90,11 @@ public class Author extends ModelBase<Author, Integer> {
 		return ModelBase.getAll(Author.class, Integer.class, "Author");
 	}	
 	
+	public boolean equals(Object other) {
+		if (other != null && other instanceof Author) {
+			return this.authorID == ((Author)other).getAuthorID();
+		}
+		return super.equals(other);
+	}
+	
 }

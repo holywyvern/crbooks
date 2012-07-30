@@ -14,8 +14,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class EditCategoryWindow extends CustomComponent {
-
+public class EditCategoryWindow extends CustomComponent implements EditBaseWindow<BookCategory> {
 	
 	private VerticalLayout mainLayout;
 	private Panel panelForm;
@@ -27,6 +26,7 @@ public class EditCategoryWindow extends CustomComponent {
 	private TextField textName;
 	private Label labelName;	
 	private Label labelHeader;
+	private Integer categoryID;
 
 	public EditCategoryWindow() {
 		buildMainLayout();
@@ -46,10 +46,12 @@ public class EditCategoryWindow extends CustomComponent {
 	}
 
 	protected void onFormButtonClick() {
-		BookCategory category = new BookCategory();
+		BookCategory category;
+		category = BookCategory.getByID(this.categoryID);
+		if (category == null) category = new BookCategory();
 		category.setDescription(textDescription.getValue().toString());
 		category.setName(textName.getValue().toString());
-		if (category.update()) {
+		if (category.saveOrUpdate()) {
 			ManagerLayout.getCurrent().changeView(new ViewCategoriesWindow());
 		}
 	}	
@@ -167,6 +169,13 @@ public class EditCategoryWindow extends CustomComponent {
 		gridFormParams.setComponentAlignment(buttonForm, new Alignment(6));
 		
 		return gridFormParams;
+	}
+
+
+	public void edit(BookCategory item) {
+		this.categoryID = item.getBookCategoryID();
+		this.textName.setValue(item.getName());
+		this.textDescription.setValue(item.getDescription());
 	}
 
 }

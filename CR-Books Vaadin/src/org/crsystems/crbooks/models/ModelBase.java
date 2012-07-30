@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.crsystems.crbooks.application.CRBooks;
 import org.crsystems.crbooks.application.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -24,7 +25,16 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 	@SuppressWarnings("unchecked")
 	public boolean save() {
 		T object = (T)this;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = null;
+		if (CRBooks.getCurrentSession() != null) {
+			if (CRBooks.getCurrentSession().getSession() == null) {
+				CRBooks.getCurrentSession().setSession(HibernateUtil.getSessionFactory().openSession());
+			}
+			session = CRBooks.getCurrentSession().getSession();
+		}
+		else {
+			session = HibernateUtil.getSessionFactory().openSession();	
+		}
         Transaction transaction = null;
         boolean saved = false;
         try {
@@ -35,8 +45,6 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
         } catch (HibernateException e) {
             transaction.rollback();
             e.printStackTrace();
-        } finally {
-            session.close();
         }		
 		return saved;
 	}
@@ -44,7 +52,16 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 	@SuppressWarnings("unchecked")
 	public boolean update() {
 		T object = (T)this;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = null;
+		if (CRBooks.getCurrentSession() != null) {
+			if (CRBooks.getCurrentSession().getSession() == null) {
+				CRBooks.getCurrentSession().setSession(HibernateUtil.getSessionFactory().openSession());
+			}
+			session = CRBooks.getCurrentSession().getSession();
+		}
+		else {
+			session = HibernateUtil.getSessionFactory().openSession();	
+		}
         Transaction transaction = null;
         boolean saved = false;
         try {
@@ -55,16 +72,23 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
         } catch (HibernateException e) {
             transaction.rollback();
             e.printStackTrace();
-        } finally {
-            session.close();
-        }				
+        }			
 		return saved;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public boolean delete() {
 		T object = (T)this;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = null;
+		if (CRBooks.getCurrentSession() != null) {
+			if (CRBooks.getCurrentSession().getSession() == null) {
+				CRBooks.getCurrentSession().setSession(HibernateUtil.getSessionFactory().openSession());
+			}
+			session = CRBooks.getCurrentSession().getSession();
+		}
+		else {
+			session = HibernateUtil.getSessionFactory().openSession();	
+		}
         Transaction transaction = null;
         boolean saved = false;
         try {
@@ -75,16 +99,23 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
         } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
-        } finally {
-            session.close();
-        }				
+        }			
 		return saved;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public boolean saveOrUpdate() {
 		T object = (T)this;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = null;
+		if (CRBooks.getCurrentSession() != null) {
+			if (CRBooks.getCurrentSession().getSession() == null) {
+				CRBooks.getCurrentSession().setSession(HibernateUtil.getSessionFactory().openSession());
+			}
+			session = CRBooks.getCurrentSession().getSession();
+		}
+		else {
+			session = HibernateUtil.getSessionFactory().openSession();	
+		}
         Transaction transaction = null;
         boolean saved = false;
         try {
@@ -95,15 +126,22 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
         } catch (HibernateException e) {
         	if (transaction != null) transaction.rollback();
             e.printStackTrace();
-        } finally {
-            session.close();
-        }				
+        }			
 		return saved;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static <K, PK extends Serializable> K getByID(Class<K> tclass, Class<PK> pkclass, PK key) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = null;
+		if (CRBooks.getCurrentSession() != null) {
+			if (CRBooks.getCurrentSession().getSession() == null) {
+				CRBooks.getCurrentSession().setSession(HibernateUtil.getSessionFactory().openSession());
+			}
+			session = CRBooks.getCurrentSession().getSession();
+		}
+		else {
+			session = HibernateUtil.getSessionFactory().openSession();	
+		}
 		Object o = null;
 		Transaction transaction = null;
 		try {
@@ -113,15 +151,22 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 		} catch (HibernateException e) {
 			if (transaction != null) transaction.rollback();
             e.printStackTrace();	
-		} finally {
-            session.close();
-        }		
+		}		
 		return (K)o;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static <T, PK> List<T> getAll(Class<T> klass, Class<PK> pkclass, String tableName) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = null;
+		if (CRBooks.getCurrentSession() != null) {
+			if (CRBooks.getCurrentSession().getSession() == null) {
+				CRBooks.getCurrentSession().setSession(HibernateUtil.getSessionFactory().openSession());
+			}
+			session = CRBooks.getCurrentSession().getSession();
+		}
+		else {
+			session = HibernateUtil.getSessionFactory().openSession();	
+		}
 		Transaction transaction = null;
 		List<T> list = null;
 		try {
@@ -131,9 +176,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 		} catch (HibernateException e) {
 			if (transaction != null) transaction.rollback();
             e.printStackTrace();	
-		} finally {
-            session.close();
-        }	
+		}
 		return list;	
 	}
 
@@ -143,7 +186,16 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 	
 	@SuppressWarnings("unchecked")
 	public static <D>  List<? extends D> getByCriterion(Class<D> klass, Criterion ... crits) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = null;
+		if (CRBooks.getCurrentSession() != null) {
+			if (CRBooks.getCurrentSession().getSession() == null) {
+				CRBooks.getCurrentSession().setSession(HibernateUtil.getSessionFactory().openSession());
+			}
+			session = CRBooks.getCurrentSession().getSession();
+		}
+		else {
+			session = HibernateUtil.getSessionFactory().openSession();	
+		}
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
@@ -157,9 +209,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 		} catch (HibernateException e) {
 			if (transaction != null) transaction.rollback();
             e.printStackTrace();	
-		} finally {
-			session.close();
-		}		
+		}	
 		return null;
 	}
 	

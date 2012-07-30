@@ -147,8 +147,8 @@ public class ApplicationLayout extends CustomComponent {
 	}
 
 	private void makeClientMenuCommands() {
-		MenuItem item = menuToolbar.addItem(String.format("%s %s+", CRBooks.getCurrentUser().getFirstName(),
-											CRBooks.getCurrentUser().getLastName()), null);
+		MenuItem item = menuToolbar.addItem(String.format("%s %s %s", CRBooks.getCurrentUser().getFirstName(),
+											CRBooks.getCurrentUser().getLastName(), "" + '\u25bc'), null);
 		generateClientSubmenu(item);
 		menuToolbar.addItem("Busqueda", makeOrderCommand());
 		menuToolbar.addItem("Página principal", makeHomeCommand());
@@ -168,8 +168,8 @@ public class ApplicationLayout extends CustomComponent {
    
 
 	private void makeManagerMenuCommands() {
-		MenuItem item = menuToolbar.addItem(String.format("%s %s(Gerente)+", CRBooks.getCurrentUser().getFirstName(),
-											CRBooks.getCurrentUser().getLastName()), null);
+		MenuItem item = menuToolbar.addItem(String.format("%s %s(Gerente)%s", CRBooks.getCurrentUser().getFirstName(),
+											CRBooks.getCurrentUser().getLastName(), "" + '\u25bc'), null);
 		generateClientSubmenu(item);
 		menuToolbar.addItem("Panel de administración", makeManagerAdministrationCommand());
 		menuToolbar.addItem("Página principal", makeHomeCommand());
@@ -191,8 +191,8 @@ public class ApplicationLayout extends CustomComponent {
 	
 	
 	private void makeAdminMenuCommands() {
-		MenuItem item = menuToolbar.addItem(String.format("%s %s(Administrador)+", CRBooks.getCurrentUser().getFirstName(),
-											CRBooks.getCurrentUser().getLastName()), null);
+		MenuItem item = menuToolbar.addItem(String.format("%s %s(Administrador)%s", CRBooks.getCurrentUser().getFirstName(),
+											CRBooks.getCurrentUser().getLastName(), "" + '\u25bc'), null);
 		generateClientSubmenu(item);
 		menuToolbar.addItem("Panel de administración", makeAdminAdministrationCommand());
 		menuToolbar.addItem("Página principal", makeHomeCommand());

@@ -94,8 +94,7 @@ public class Book extends ModelBase<Book, Integer> {
 	}
 
 	public static Book getByID(Integer key) {
-		// TODO Auto-generated method stub
-		return null;
+		return ModelBase.getByID(Book.class, Integer.class, key);
 	}
 
 	public Integer getStock() {
@@ -164,5 +163,11 @@ public class Book extends ModelBase<Book, Integer> {
 		categories.add(c);
 	}	
 	
+	public boolean equals(Object other) {
+		if (other != null && other instanceof Book) {
+			return this.bookID == ((Book)other).getBookID();
+		}
+		return super.equals(other);
+	}
 	
 }

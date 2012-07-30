@@ -19,7 +19,7 @@ public class ViewBooksWindow extends ViewBaseWindow<Book, Integer> {
 
 	@Override
 	protected EditBaseWindow<Book> createEditWindow() {
-		return null;
+		return new EditBookWindow();
 	}
 
 	@Override

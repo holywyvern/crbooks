@@ -96,6 +96,7 @@ public class NewBookWindow extends CustomComponent {
 		Book book = new Book();
 		book.setAuthor((Author)this.comboAuthor.getValue());
 		for (BookCategory c : getSelectedCategories()) {
+			System.out.println(c.getName());
 			book.addCategory(c);
 		}
 		book.setDescription(this.textDescription.getValue().toString());
@@ -119,9 +120,14 @@ public class NewBookWindow extends CustomComponent {
 		return book;
 	}
 
-	@SuppressWarnings("unchecked")
 	private List<BookCategory> getSelectedCategories() {
-		Collection<?> l = this.optionCategories.getItemIds();
+		Object value = this.optionCategories.getValue();
+		Collection<?> l = null;
+		if (value instanceof Collection<?>) {
+			l = (Collection<?>)value;
+		} else {
+			l = new ArrayList<Object>();
+		}
 		List<BookCategory> list = new ArrayList<BookCategory>();
 		for (Object item : l) {
 			if (item instanceof BookCategory) {

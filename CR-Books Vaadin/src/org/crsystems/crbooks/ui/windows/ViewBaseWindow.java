@@ -220,7 +220,11 @@ public abstract class ViewBaseWindow<T extends ModelBase<T, PK>, PK extends Seri
 	protected void onEditButtonClick(T item) 
 	{
 		
-		
+		EditBaseWindow<T> window = this.createEditWindow();
+		if (window != null) {
+			window.edit(item);
+			ManagerLayout.getCurrent().changeView(window);
+		}
 	}
 	
 ///////////////////////////CLAUDIO VERIFICAR METODO/////////////////77

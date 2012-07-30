@@ -72,4 +72,15 @@ public class BookCategory extends ModelBase<BookCategory, Integer>  {
 		return ModelBase.getAll(BookCategory.class, Integer.class, "BookCategory");
 	}	
 	
+	public boolean equals(Object other) {
+		if (other != null && other instanceof BookCategory) {
+			return this.bookCategoryID == ((BookCategory)other).getBookCategoryID();
+		}
+		return super.equals(other);
+	}
+
+	public static BookCategory getByID(Integer key) {
+		return ModelBase.getByID(BookCategory.class, Integer.class, key);
+	}
+	
 }

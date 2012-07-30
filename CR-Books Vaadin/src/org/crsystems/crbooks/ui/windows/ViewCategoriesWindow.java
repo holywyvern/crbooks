@@ -17,7 +17,7 @@ public class ViewCategoriesWindow extends ViewBaseWindow<BookCategory, Integer> 
 
 	@Override
 	protected EditBaseWindow<BookCategory> createEditWindow() {
-		return null;
+		return new EditCategoryWindow();
 	}
 
 	@Override
