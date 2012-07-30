@@ -2,6 +2,7 @@ package org.crsystems.crbooks.ui.windows;
 
 import java.util.List;
 
+import org.crsystems.crbooks.models.Author;
 import org.crsystems.crbooks.models.BookCategory;
 
 import com.vaadin.ui.Button;
@@ -9,14 +10,14 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.BaseTheme;
 
-public class ViewCategoriesWindow extends ViewBaseWindow<BookCategory, Integer> {
+public class ViewAuthorsWindow extends ViewBaseWindow<Author, Integer> {
 
-	public ViewCategoriesWindow() {
-		super("Listado de Categorias");
+	public ViewAuthorsWindow() {
+		super("Listado de Autores");
 	}
 
 	@Override
-	protected EditBaseWindow<BookCategory> createEditWindow() {
+	protected EditBaseWindow<Author> createEditWindow() {
 		return null;
 	}
 
@@ -28,12 +29,12 @@ public class ViewCategoriesWindow extends ViewBaseWindow<BookCategory, Integer> 
 	}
 
 	@Override
-	protected List<BookCategory> getAllItems() {
-		return BookCategory.getAll();
+	protected List<Author> getAllItems() {
+		return Author.getAll();
 	}
 
 	@Override
-	protected Object[] itemToTable(BookCategory item, boolean showEdit,
+	protected Object[] itemToTable(Author item, boolean showEdit,
 			boolean showDelete) {
 		return new Object[] {
 				item.getName(), 

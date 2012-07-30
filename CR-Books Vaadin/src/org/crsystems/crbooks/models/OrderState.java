@@ -10,12 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="OrderStates")
 public class OrderState extends ModelBase<OrderState, Integer> {
 
 	@Id
-	@GeneratedValue		
+	@GenericGenerator(name="generator", strategy="increment")
+    @GeneratedValue(generator="generator")	
 	private Integer orderStateID;
 	
 	@OneToMany(mappedBy="orderID")

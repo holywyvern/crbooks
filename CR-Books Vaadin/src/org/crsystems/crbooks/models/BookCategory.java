@@ -9,12 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="BookCategories")
 public class BookCategory extends ModelBase<BookCategory, Integer>  {
 
 	@Id
-	@GeneratedValue	
+	@GenericGenerator(name="generator", strategy="increment")
+    @GeneratedValue(generator="generator")
 	private Integer bookCategoryID;
 
 	@Basic

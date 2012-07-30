@@ -14,12 +14,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="OrderItems")
 public class OrderItem extends ModelBase<OrderItem, Integer> {
 
 	@Id
-	@GeneratedValue	
+	@GenericGenerator(name="generator", strategy="increment")
+    @GeneratedValue(generator="generator")
 	private Integer orderItemID;
 
 

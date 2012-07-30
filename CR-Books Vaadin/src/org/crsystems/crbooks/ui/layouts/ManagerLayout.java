@@ -1,8 +1,12 @@
 package org.crsystems.crbooks.ui.layouts;
 
 import org.crsystems.crbooks.ui.windows.ManagerHomeWindow;
+import org.crsystems.crbooks.ui.windows.NewAuthorWindow;
+import org.crsystems.crbooks.ui.windows.NewBookWindow;
 import org.crsystems.crbooks.ui.windows.NewCategoryWindow;
 import org.crsystems.crbooks.ui.windows.NewPublisherWindow;
+import org.crsystems.crbooks.ui.windows.ViewAuthorsWindow;
+import org.crsystems.crbooks.ui.windows.ViewBooksWindow;
 import org.crsystems.crbooks.ui.windows.ViewCategoriesWindow;
 import org.crsystems.crbooks.ui.windows.ViewPublishersWindow;
 
@@ -31,6 +35,7 @@ public class ManagerLayout extends CustomComponent {
 		{"Consultas", "Buscar pedidos"},
 		{"Categorias", "Ver categorias", "Agregar categoria" },
 		{"Editoriales", "Ver editoriales", "Agregar editorial"},
+		{"Autores", "Ver autores", "Agregar autor"},
 		{"Libros", "Ver libros", "Agregar libro", "Agregar Stock"},
 		{"Clientes", "Ver clientes", "Suspender cliente", "Bloquear cliente"},
 		{"Estados de pedidos", "Ver estados de pedido", "Agregar estados de pedido"}
@@ -73,8 +78,10 @@ public class ManagerLayout extends CustomComponent {
 				}
 				i++;
 			}
+			
 			treeMenu.expandItemsRecursively(m[0]);
 		}
+		treeMenu.setChildrenAllowed("Escritorio", false);
 	}; 
 
 
@@ -100,9 +107,9 @@ public class ManagerLayout extends CustomComponent {
 		} else if (value == "Agregar categoria") {
 			this.changeView(new NewCategoryWindow());
 		} else if (value == "Ver libros") {
-			
+			this.changeView(new ViewBooksWindow());
 		} else if (value == "Agregar libro") {
-			
+			this.changeView(new NewBookWindow());
 		} else if (value == "Agregar Stock") {
 			
 		} else if (value == "Ver clientes") {
@@ -119,6 +126,10 @@ public class ManagerLayout extends CustomComponent {
 	
 		} else if (value == "Agregar estados de pedido") {
 			
+		} else if (value == "Ver autores") {
+			this.changeView(new ViewAuthorsWindow());
+		} else if (value == "Agregar autor") {
+			this.changeView(new NewAuthorWindow());
 		}
 	}	
 	

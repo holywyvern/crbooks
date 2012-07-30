@@ -9,7 +9,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.BaseTheme;
 
-public class ViewPublishersWindow extends ViewBaseWindow<Publisher, String> {
+public class ViewPublishersWindow extends ViewBaseWindow<Publisher, Integer> {
 
 	public ViewPublishersWindow() {
 		super("Listado de Editoriales");
@@ -30,25 +30,10 @@ public class ViewPublishersWindow extends ViewBaseWindow<Publisher, String> {
 	@Override
 	protected Object[] itemToTable(Publisher item, boolean showEdit,
 			boolean showDelete) {
-		HorizontalLayout l = new HorizontalLayout();
-		
-		if (showEdit) {
-			Button buttonEdit = new Button("Editar");
-			buttonEdit.setStyleName(BaseTheme.BUTTON_LINK);
-			l.addComponent(buttonEdit);
-						
-		}
-		if (showDelete) {
-			Button buttonDelete = new Button("Eliminar");
-			buttonDelete.setStyleName(BaseTheme.BUTTON_LINK);
-			l.addComponent(buttonDelete);
-		}
-		l.setSizeFull();
-		l.setSpacing(true);
 		return new Object[] {
 				item.getName(), 
 				item.getDescription(),
-				l
+				createActionLayout(item, showEdit, showDelete)
 		};
 	}
 

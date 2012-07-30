@@ -1,5 +1,6 @@
 package org.crsystems.crbooks.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,12 +14,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="Books")
 public class Book extends ModelBase<Book, Integer> {
 
 	@Id
-	@GeneratedValue	
+	@GenericGenerator(name="generator", strategy="increment")
+    @GeneratedValue(generator="generator")
 	private Integer bookID;
 
 	@Basic
@@ -138,6 +142,20 @@ public class Book extends ModelBase<Book, Integer> {
 
 	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
+	}
+
+	public static List<Book> getAll() {
+		return ModelBase.getAll(Book.class, Integer.class, "Book");
+	}
+
+	public void addCategory(BookCategory c) {
+		if (this.categories == null) {
+			this.categories = new ArrayList<BookCategory>();
+		}
+		for (BookCategory category : this.categories) {
+			if (category.getBookCategoryID() == c.getBookCategoryID()) return;
+		}
+		categories.add(c);
 	}	
 	
 	
