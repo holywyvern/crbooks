@@ -7,6 +7,7 @@ import org.crsystems.crbooks.ui.windows.NewBookWindow;
 import org.crsystems.crbooks.ui.windows.NewCategoryWindow;
 import org.crsystems.crbooks.ui.windows.NewOrderStateWindow;
 import org.crsystems.crbooks.ui.windows.NewPublisherWindow;
+import org.crsystems.crbooks.ui.windows.ViewAllClientes;
 import org.crsystems.crbooks.ui.windows.ViewAuthorsWindow;
 import org.crsystems.crbooks.ui.windows.ViewBooksWindow;
 import org.crsystems.crbooks.ui.windows.ViewCategoriesWindow;
@@ -117,7 +118,7 @@ public class ManagerLayout extends CustomComponent {
 		} else if (value == "Agregar Stock") {
 			
 		} else if (value == "Ver clientes") {
-			
+			this.changeView(new ViewAllClientes());
 		} else if (value == "Suspender cliente") {
 			
 		} else if (value == "Bloquear cliente") {

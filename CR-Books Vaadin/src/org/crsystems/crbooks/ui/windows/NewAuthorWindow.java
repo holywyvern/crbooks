@@ -162,7 +162,7 @@ public class NewAuthorWindow extends CustomComponent {
 		
 		// buttonForm
 		buttonForm = new Button();
-		buttonForm.setCaption("Crear categoria");
+		buttonForm.setCaption("Crear Autor");
 		buttonForm.setImmediate(false);
 		buttonForm.setWidth("-1px");
 		buttonForm.setHeight("-1px");
