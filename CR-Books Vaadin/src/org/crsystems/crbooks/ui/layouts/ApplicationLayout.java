@@ -140,8 +140,9 @@ public class ApplicationLayout extends CustomComponent {
 
 	private void makeDefaultMenuCommands() {
 		MenuItem item;
-		menuToolbar.addItem("Página principal", makeHomeCommand());/////lalalaal
-		item=menuToolbar.addItem("Busqueda", makeOrderCommand());
+		
+		menuToolbar.addItem("Página principal", makeHomeCommand());	
+		
 		item = menuToolbar.addItem("Iniciar sesión", this.createLoginMenuCommand());
 		item = menuToolbar.addItem("Registrarse", this.createRegisterMenuCommand());
 	}
@@ -158,6 +159,11 @@ public class ApplicationLayout extends CustomComponent {
 	
 	
 
+	private void generateSubMenuCatalogo(MenuItem item) {
+		item.addItem("Todos los Libros", null);
+		item.addSeparator();
+		item.addItem("Busqueda", makeOrderCommand());
+	}
 
 	private void generateClientSubmenu(MenuItem item) {
 		item.addItem("Preferencias", null);

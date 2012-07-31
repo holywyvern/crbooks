@@ -68,6 +68,8 @@ public abstract class ViewBaseWindow<T extends ModelBase<T, PK>, PK extends Seri
 	
 	protected abstract List<T> getAllItems();
 	
+
+	
 	protected abstract Object[] itemToTable(T item, boolean showEdit, boolean showDelete);
 	
 	
@@ -166,6 +168,7 @@ public abstract class ViewBaseWindow<T extends ModelBase<T, PK>, PK extends Seri
 	
 ///////////////////////////CLAUDIO VERIFICAR METODO/////////////////77
 	
+	
 	private Button createOrderButton(T item) {
 		
 		Button buttonDelete = new Button("Pedir");
@@ -181,6 +184,8 @@ public abstract class ViewBaseWindow<T extends ModelBase<T, PK>, PK extends Seri
 		return buttonDelete;
 	
 	}
+	
+	
 	
 	protected HorizontalLayout createActionLayout(T item, boolean showEdit, boolean showDelete) {
 		HorizontalLayout l = new HorizontalLayout();
@@ -233,6 +238,11 @@ public abstract class ViewBaseWindow<T extends ModelBase<T, PK>, PK extends Seri
 		
 		
 	}
-	
+	private void onDetailButtonClick(T item) {
+		
+			CRBooks.setView(new HomeWindow());
+		
+		
+	}
 	
 }
