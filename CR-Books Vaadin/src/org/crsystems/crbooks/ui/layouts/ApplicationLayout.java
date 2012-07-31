@@ -11,6 +11,7 @@ import org.crsystems.crbooks.ui.windows.HomeWindow;
 import org.crsystems.crbooks.ui.windows.RegisterWindow;
 import org.crsystems.crbooks.ui.windows.SearchBooksWindow;
 import org.crsystems.crbooks.ui.windows.ViewBooksWindow;
+import org.crsystems.crbooks.ui.windows.ViewPerfilConfiguration;
 import org.crsystems.crbooks.ui.windows.ViewResultsSearchBooks;
 import org.crsystems.crbooks.ui.windows.ViewUserOrders;
 import org.vaadin.gravatar.GravatarResource;
@@ -132,6 +133,25 @@ public class ApplicationLayout extends CustomComponent {
 		};
 	}
 	
+	private MenuBar.Command makePerfilWindow() {
+		return new MenuBar.Command() {
+
+			private static final long serialVersionUID = -3013627189933105983L;
+
+			public void menuSelected(MenuItem selectedItem) {
+				onPerfilWindowCommand();
+			}
+
+			
+
+		};
+	}
+	
+	
+	protected void onPerfilWindowCommand() {
+		CRBooks.setView(new ViewPerfilConfiguration());
+		
+	}
 	protected void onHomeMenuCommand() {
 		this.changeView(new HomeWindow());
 	}	
@@ -240,12 +260,15 @@ public class ApplicationLayout extends CustomComponent {
 	}
 
 	private void generateClientSubmenu(MenuItem item) {
-		item.addItem("Preferencias", null);
+		item.addItem("Preferencias", makePerfilWindow());
 		item.addSeparator();
 		item.addItem("Cerrar sesión", this.createLogoutMenuCommand());
 	}
 
    
+
+	
+
 
 	private void makeManagerMenuCommands() {
 		MenuItem item = menuToolbar.addItem(String.format("%s %s(Gerente)%s", CRBooks.getCurrentUser().getFirstName(),
