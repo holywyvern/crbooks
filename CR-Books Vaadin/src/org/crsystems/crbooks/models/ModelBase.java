@@ -15,7 +15,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 
 
-public abstract class ModelBase<T, PK extends Serializable> implements IDatabaseModel<T, PK> {
+public abstract class ModelBase<T, PK extends Serializable> implements IDatabaseModel<T, PK>, Serializable {
 	
 	public ModelBase() {
 		
@@ -180,6 +180,21 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 		return list;	
 	}
 
+	public boolean saveOrUpdateNoTransaction() {
+		T object = (T)this;
+		Session session = null;
+		if (CRBooks.getCurrentSession() != null) {
+			if (CRBooks.getCurrentSession().getSession() == null) {
+				CRBooks.getCurrentSession().setSession(HibernateUtil.getSessionFactory().openSession());
+			}
+			session = CRBooks.getCurrentSession().getSession();
+		}
+		else {
+			session = HibernateUtil.getSessionFactory().openSession();	
+		}		
+		session.saveOrUpdate(object);
+		return true;
+	}		
 	
 	
 	protected abstract String getTableName();

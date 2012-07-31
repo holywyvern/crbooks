@@ -1,5 +1,6 @@
 package org.crsystems.crbooks.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +22,6 @@ public class OrderState extends ModelBase<OrderState, Integer> {
     @GeneratedValue(generator="generator")	
 	private Integer orderStateID;
 	
-	@OneToMany(mappedBy="orderID")
-	private List<Order> orders;	
-	
 	@Basic
 	private String name;
 	
@@ -31,32 +29,27 @@ public class OrderState extends ModelBase<OrderState, Integer> {
 	private String description;
 	
 	@Basic
+	private Boolean isFinal;
+	
+	@Basic
 	private String iconName;
 	
 	@Override
 	public String getTableName() {
 		// TODO Auto-generated method stub
-		return null;
+		return "OrderStates";
 	}
 
 	@Override
 	public boolean isValid() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public Map<String, String> getErrorFields() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
 	}
 
 	public Integer getOrderStateID() {
@@ -89,6 +82,24 @@ public class OrderState extends ModelBase<OrderState, Integer> {
 
 	public void setIconName(String iconName) {
 		this.iconName = iconName;
+	}
+
+	public Boolean isFinal() {
+		return isFinal;
+	}
+
+	public void setFinal(Boolean isFinal) {
+		this.isFinal = isFinal;
+	}
+
+	public static List<OrderState> getAll() {
+		List<OrderState> list = ModelBase.getAll(OrderState.class, Integer.class, "OrderState");
+		if (list == null) list = new ArrayList<OrderState>();
+		return list;
+	}
+
+	public static OrderState getByID(Integer key) {
+		return ModelBase.getByID(OrderState.class, Integer.class, key);
 	}
 
 }

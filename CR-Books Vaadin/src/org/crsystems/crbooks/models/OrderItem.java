@@ -1,5 +1,6 @@
 package org.crsystems.crbooks.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 @Entity
 @Table(name="OrderItems")
@@ -35,10 +38,6 @@ public class OrderItem extends ModelBase<OrderItem, Integer> {
 	@OneToOne(optional=false)
 	private Order order;
 	
-	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false )
-	@JoinColumn(name = "User", referencedColumnName = "email", nullable = false, insertable = false, updatable = false)
-	private User user;
-	
 	public Integer getOrderItemID() {
 		return orderItemID;
 	}
@@ -55,7 +54,7 @@ public class OrderItem extends ModelBase<OrderItem, Integer> {
 	@Override
 	public boolean isValid() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -70,14 +69,6 @@ public class OrderItem extends ModelBase<OrderItem, Integer> {
 
 	public void setOrder(Order order) {
 		this.order = order;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public Integer getAmount() {
@@ -98,6 +89,14 @@ public class OrderItem extends ModelBase<OrderItem, Integer> {
 
 	public Double price() {
 		return this.getAmount() * this.getBook().getPrice();
+	}
+
+	public static List<OrderItem> getByOrder(Order order) {
+		Criterion c = Restrictions.eq("orderID", order.getOrderID());
+		List<OrderItem> list = null;
+		list = ModelBase.getByCriterion(OrderItem.class, c);
+		if (list == null) list = new ArrayList<OrderItem>();
+		return list;
 	}	
 	
 }

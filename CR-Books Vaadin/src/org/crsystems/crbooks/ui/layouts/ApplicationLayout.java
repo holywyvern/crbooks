@@ -3,6 +3,7 @@ package org.crsystems.crbooks.ui.layouts;
 import org.crsystems.crbooks.application.CRBooks;
 import org.crsystems.crbooks.application.listeners.LoginListener;
 import org.crsystems.crbooks.ui.windows.AdministratorWindow;
+import org.crsystems.crbooks.ui.windows.CurrentOrderWindow;
 import org.crsystems.crbooks.ui.windows.HomeWindow;
 import org.crsystems.crbooks.ui.windows.RegisterWindow;
 import org.crsystems.crbooks.ui.windows.SearchBooksWindow;
@@ -171,9 +172,26 @@ public class ApplicationLayout extends CustomComponent {
 		generateClientSubmenu(item);
 		item = menuToolbar.addItem("Catálogo" + '\u25bc', null);
 		generateSubMenuBookList(item);
+		menuToolbar.addItem("Mi pedido actual", makeCurrentOrderMenuCommand());
 		menuToolbar.addItem("Página principal", makeHomeCommand());
 		
 		
+	}	
+
+	private Command makeCurrentOrderMenuCommand() {
+		return new MenuBar.Command() {
+
+			private static final long serialVersionUID = -3013627189933105983L;
+
+			public void menuSelected(MenuItem selectedItem) {
+				onCurrentOrderCommand();
+			}
+
+		};
+	}
+
+	protected void onCurrentOrderCommand() {
+		CRBooks.setView(new CurrentOrderWindow());
 	}	
 
 	private void generateSubMenuBookList(MenuItem item) {

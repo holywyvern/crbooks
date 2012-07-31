@@ -4,10 +4,12 @@ import org.crsystems.crbooks.ui.windows.ManagerHomeWindow;
 import org.crsystems.crbooks.ui.windows.NewAuthorWindow;
 import org.crsystems.crbooks.ui.windows.NewBookWindow;
 import org.crsystems.crbooks.ui.windows.NewCategoryWindow;
+import org.crsystems.crbooks.ui.windows.NewOrderStateWindow;
 import org.crsystems.crbooks.ui.windows.NewPublisherWindow;
 import org.crsystems.crbooks.ui.windows.ViewAuthorsWindow;
 import org.crsystems.crbooks.ui.windows.ViewBooksWindow;
 import org.crsystems.crbooks.ui.windows.ViewCategoriesWindow;
+import org.crsystems.crbooks.ui.windows.ViewOrderStateWindow;
 import org.crsystems.crbooks.ui.windows.ViewPublishersWindow;
 
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -36,9 +38,10 @@ public class ManagerLayout extends CustomComponent {
 		{"Categorias", "Ver categorias", "Agregar categoria" },
 		{"Editoriales", "Ver editoriales", "Agregar editorial"},
 		{"Autores", "Ver autores", "Agregar autor"},
-		{"Libros", "Ver libros", "Agregar libro", "Agregar Stock"},
-		{"Clientes", "Ver clientes", "Suspender cliente", "Bloquear cliente"},
-		{"Estados de pedidos", "Ver estados de pedido", "Agregar estados de pedido"}
+		{"Libros", "Ver libros", "Agregar libro"},
+		{"Estados de pedidos", "Ver estados de pedido", "Agregar estados de pedido"},
+		{"Clientes", "Ver clientes", "Suspender cliente", "Bloquear cliente"}
+		
 	};	
 	
 	private HorizontalLayout mainLayout;
@@ -123,14 +126,14 @@ public class ManagerLayout extends CustomComponent {
 		} else if (value == "Agregar editorial") {
 			this.changeView(new NewPublisherWindow());
 		} else if (value == "Ver estados de pedido") {
-	
+			this.changeView(new ViewOrderStateWindow());
 		} else if (value == "Agregar estados de pedido") {
-			
+			this.changeView(new NewOrderStateWindow());
 		} else if (value == "Ver autores") {
 			this.changeView(new ViewAuthorsWindow());
 		} else if (value == "Agregar autor") {
 			this.changeView(new NewAuthorWindow());
-		}
+		} 
 	}	
 	
 

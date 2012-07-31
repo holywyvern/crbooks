@@ -43,24 +43,24 @@ public class CRBooks extends Application {
 
 	public static SystemMessages getSystemMessages() {
 		CustomizedSystemMessages messages = new CustomizedSystemMessages();
-		messages.setAuthenticationErrorCaption("") ;
-		messages.setAuthenticationErrorMessage("") ;
-		messages.setAuthenticationErrorURL("") ;
-		messages.setCommunicationErrorCaption("") ;
-		messages.setCommunicationErrorMessage("") ;
-		messages.setCommunicationErrorURL("") ;
-		messages.setCookiesDisabledCaption("") ; 
-		messages.setCookiesDisabledMessage("") ; 
-		messages.setCookiesDisabledURL("") ;
-		messages.setInternalErrorCaption("") ;
-		messages.setInternalErrorMessage("") ;
-		messages.setInternalErrorURL("") ;
-		messages.setOutOfSyncCaption("") ;
-		messages.setOutOfSyncMessage("") ;
-		messages.setOutOfSyncURL("") ;
-		messages.setSessionExpiredCaption("") ;
-		messages.setSessionExpiredMessage("") ;
-		messages.setSessionExpiredURL("");
+		messages.setAuthenticationErrorCaption("Error de autentificación") ;
+		messages.setAuthenticationErrorMessage("No tiene privilegios para acceder al sistema.") ;
+		messages.setAuthenticationErrorURL("#") ;
+		messages.setCommunicationErrorCaption("Error de comunicación") ;
+		messages.setCommunicationErrorMessage("El sistema no ha podido comunicarse. Compruebe su conexión e intente denuevo") ;
+		messages.setCommunicationErrorURL("#") ;
+		messages.setCookiesDisabledCaption("Coockies desactivadas") ; 
+		messages.setCookiesDisabledMessage("Las cookies del sistema estan deshabilitadas.") ; 
+		messages.setCookiesDisabledURL("#") ;
+		messages.setInternalErrorCaption("Error interno") ;
+		messages.setInternalErrorMessage("Ha ocurrido un error interno.") ;
+		messages.setInternalErrorURL("#") ;
+		messages.setOutOfSyncCaption("Fuera de sincronía") ;
+		messages.setOutOfSyncMessage("La sincronización con el servidor se ha roto. Click aqui para continuar.") ;
+		messages.setOutOfSyncURL("#") ;
+		messages.setSessionExpiredCaption("Sesión expirada") ;
+		messages.setSessionExpiredMessage("Se ha espirado la conexión. Click aqui para continuar.");
+		messages.setSessionExpiredURL("#");
 		messages.setAuthenticationErrorNotificationEnabled(true);
 		messages.setCommunicationErrorNotificationEnabled(true);
 		messages.setCookiesDisabledNotificationEnabled(true);
@@ -82,8 +82,8 @@ public class CRBooks extends Application {
 		return CRBooks.instance.getMainWindow();
 	}
 	
-	public static void showWarning(String caption) {
-		mainWindow().showNotification(caption, Notification.TYPE_WARNING_MESSAGE);
+	public static void showWarning(String i) {
+		mainWindow().showNotification(i, Notification.TYPE_WARNING_MESSAGE);
 	}
 	
 	public static void showError(String caption) {
@@ -103,6 +103,7 @@ public class CRBooks extends Application {
 	}
 
 	public static User getCurrentUser() {
+		if (CRBooks.currentSession == null) return null;
 		return CRBooks.currentSession.getUser();
 	}	
 	

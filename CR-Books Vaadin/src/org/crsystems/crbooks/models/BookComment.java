@@ -1,6 +1,7 @@
 package org.crsystems.crbooks.models;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="BookComments")
-public class BookComment {
+public class BookComment extends ModelBase<BookComment, Integer>{
 
 	@Id
 	@GenericGenerator(name="generator", strategy="increment")
@@ -76,6 +77,24 @@ public class BookComment {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	@Override
+	protected String getTableName() {
+		// TODO Auto-generated method stub
+		return "BookComments";
+	}
+
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Map<String, String> getErrorFields() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

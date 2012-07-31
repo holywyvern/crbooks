@@ -26,21 +26,22 @@ import org.hibernate.criterion.Restrictions;
 public class Order extends ModelBase<Order, Integer> {
 
 	@Id
-	@GenericGenerator(name="generator", strategy="increment")
-    @GeneratedValue(generator="generator")
+	@GenericGenerator(name="generatorOrders", strategy="increment")
+    @GeneratedValue(generator="generatorOrders")
 	private Integer orderID;
+
+	@Temporal(TemporalType.DATE)
+	private Date createdAt;
 	
 	@OneToMany(mappedBy="orderItemID")
-	private List<OrderItem> items;
+	private List<OrderItem> orderItems;	
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	private User user;
 	
-	@Temporal(TemporalType.DATE)
-	private Date createdAt;
-	
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-	private OrderState state;
+	private OrderState orderState;
+	
 	
 	public Integer getOrderID() {
 		return orderID;
@@ -57,8 +58,9 @@ public class Order extends ModelBase<Order, Integer> {
 
 	@Override
 	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.orderItems == null) return false;
+		if (this.orderItems.size() < 1) return false;
+		return true;
 	}
 
 	@Override
@@ -76,19 +78,19 @@ public class Order extends ModelBase<Order, Integer> {
 	}
 
 	public OrderState getState() {
-		return state;
+		return orderState;
 	}
 
 	public void setState(OrderState state) {
-		this.state = state;
+		this.orderState = state;
 	}
 
 	public List<OrderItem> getItems() {
-		return items;
+		return orderItems;
 	}
 
 	public void setItems(List<OrderItem> items) {
-		this.items = items;
+		this.orderItems = items;
 	}	
 	
 	public Double getTotalPrice() {
@@ -115,6 +117,7 @@ public class Order extends ModelBase<Order, Integer> {
 		}
 		if (!addedToOther) {
 			list.add(item);
+			item.setOrder(this);
 		}
 	}
 	public static List<Order> getAll() {
@@ -174,6 +177,6 @@ public class Order extends ModelBase<Order, Integer> {
 
 	public void setUser(User user) {
 		this.user = user;
-	}	
+	}
 	
 }

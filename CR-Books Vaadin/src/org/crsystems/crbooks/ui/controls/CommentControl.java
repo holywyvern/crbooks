@@ -42,12 +42,12 @@ public class CommentControl extends CustomComponent {
 		if (createdAt.after(today)) {
 			return String.format("el ", createdAt.toString());
 		}
-		long hours = (today.getTime()-createdAt.getTime())/(3600000);
+		long hours = (today.getTime()-createdAt.getTime())/(60*60*10000);
 		if (hours > 0) {
 			String hf = hours > 1 ? String.format("%d horas", hours) : "una hora";
 			return String.format("Hace aproximadamente %s", hf);
 		}
-		long mins= (today.getTime()-createdAt.getTime())/(60000);
+		long mins= (today.getTime()-createdAt.getTime())/(60*10000);
 		if (mins > 0) {
 			String mf = mins > 0 ? String.format("%d minutos", mins) : "un minuto";
 			return String.format("Hace aproximadamente %s", mf);
@@ -124,6 +124,7 @@ public class CommentControl extends CustomComponent {
 		textComment.setHeight("-1px");
 		textComment.setReadThrough(false);
 		textComment.setWriteThrough(false);
+		textComment.setEnabled(false);
 		gridData.addComponent(textComment);
 		
 		return gridData;

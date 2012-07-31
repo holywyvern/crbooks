@@ -287,5 +287,13 @@ public class User extends ModelBase<User, Integer> {
 	public Object getFormatedName() {
 		return String.format("%s %s", this.firstName, this.lastName);
 	}
+
+	public List<BookComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<BookComment> comments) {
+		this.comments = comments;
+	}
 	
 }
