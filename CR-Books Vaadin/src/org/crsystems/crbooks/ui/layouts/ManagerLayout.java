@@ -1,5 +1,6 @@
 package org.crsystems.crbooks.ui.layouts;
 
+import org.crsystems.crbooks.ui.windows.ConsultaGerente;
 import org.crsystems.crbooks.ui.windows.ManagerHomeWindow;
 import org.crsystems.crbooks.ui.windows.NewAuthorWindow;
 import org.crsystems.crbooks.ui.windows.NewBookWindow;
@@ -104,7 +105,7 @@ public class ManagerLayout extends CustomComponent {
 		if (value == "Escritorio") {
 			this.changeView(new ManagerHomeWindow());
 		} else if (value == "Buscar pedidos") {
-			
+			this.changeView(new ConsultaGerente());
 		} else if (value == "Ver categorias") {
 			this.changeView(new ViewCategoriesWindow());
 		} else if (value == "Agregar categoria") {
