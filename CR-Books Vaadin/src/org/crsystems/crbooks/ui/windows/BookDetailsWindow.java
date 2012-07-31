@@ -142,7 +142,12 @@ public class BookDetailsWindow extends CustomComponent {
 			System.out.println(comment.getText());
 		}
 		boolean bookOwned = false;
-		List<Order> list = CRBooks.getCurrentUser().getOrders();
+		List<Order> list;
+		try {
+			list = CRBooks.getCurrentUser().getOrders();
+		} catch (Exception e) {
+			list = new ArrayList<Order>();
+		}
 		if ( list == null )list = new ArrayList<Order>();
 		System.out.println(list.size());
 		for (Order order : list) {
