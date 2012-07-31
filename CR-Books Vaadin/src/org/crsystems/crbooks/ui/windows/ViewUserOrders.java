@@ -93,7 +93,7 @@ public class ViewUserOrders extends CustomComponent {
 		// common part: create layout
 		panelBase = new Panel();
 		panelBase.setImmediate(false);
-		panelBase.setWidth("-1px");
+		panelBase.setWidth("100%");
 		panelBase.setHeight("100.0%");
 		
 		// gridBase
