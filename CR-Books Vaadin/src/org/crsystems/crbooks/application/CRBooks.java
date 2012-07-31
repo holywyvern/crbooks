@@ -42,7 +42,6 @@ public class CRBooks extends Application {
 		CRBooks.setInstance(this);
 		CRBooks.setView(new HomeWindow());
 		setMainWindow(mainWindow);
-		
 		CRBooks.instance = this;
 	}
 

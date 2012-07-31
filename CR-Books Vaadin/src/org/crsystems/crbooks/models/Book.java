@@ -160,9 +160,6 @@ public class Book extends ModelBase<Book, Integer> {
 		return ModelBase.getAll(Book.class, Integer.class, "Book");
 	}
 	
-	
-	
-	
 
 	public void addCategory(BookCategory c) {
 		if (this.categories == null) {
@@ -182,9 +179,14 @@ public class Book extends ModelBase<Book, Integer> {
 	}
 
 	public static List<Book> getMostSoldBooks(int limit) {
-		List<Book> list = null;
+		List<Book> list = Book.getAll();
 		List<Book> result = new ArrayList<Book>();
 		if (list == null) list = new ArrayList<Book>();
+		for (int i = 0; i < limit; i++) {
+			if (i < list.size()){
+				result.add(list.get(i));
+			}
+		}
 		return result;
 	}
 
@@ -244,14 +246,8 @@ public class Book extends ModelBase<Book, Integer> {
 		return ModelBase.getByCriterion(Book.class, c);
 	}
 
-	public URL thumbName() {
-		try {
-			return CRBooks.getInstance().getServletContext().getResource(String.format("WEB-INF/img/books/book%03d.png"));
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+	public String thumbName() {
+		System.out.println(String.format("books/book-tumb%03d.png", this.bookID));
+		return String.format("img/books/book-tumb%03d.png", this.bookID);
 	}
-	
 }

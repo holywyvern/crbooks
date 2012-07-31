@@ -17,6 +17,17 @@
 .cr-books-menu-commands .v-menubar-menuitem-caption {
 	text-decoration: underline;
 }
+
+.cr-books-menu-commands .v-menubar-menuitem-caption img {
+	width: 2em;
+	height: 2em;
+}
+
+.gwt-MenuItem img {
+	width: 2em;
+	height: 2em;
+} 
+
 .cr-books-menu-commands-username {
 	text-decoration: none;
 	color: #CCCCCC;
