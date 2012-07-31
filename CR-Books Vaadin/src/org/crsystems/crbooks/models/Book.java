@@ -192,7 +192,7 @@ public class Book extends ModelBase<Book, Integer> {
 	}
 	
 	public static List<Book> getByAuthor(Author author) {
-		Criterion c = Restrictions.eq("authorID", author.getAuthorID());
+		Criterion c = Restrictions.sqlRestriction(String.format("author_authorID = %d", author.getAuthorID()));
 		List<Book> list =  ModelBase.getByCriterion(Book.class, c);
 		if (list == null) list = new ArrayList<Book>();
 		return list;
