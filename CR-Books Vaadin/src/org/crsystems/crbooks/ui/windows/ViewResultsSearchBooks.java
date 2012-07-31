@@ -148,7 +148,6 @@ public class ViewResultsSearchBooks extends CustomComponent {
 			return Book.getByTitle(search.textFieldLibro.getValue().toString());
 		}
 			
-		
 		return Book.getAll();
 		
 	}

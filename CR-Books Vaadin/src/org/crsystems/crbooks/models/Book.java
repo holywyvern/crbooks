@@ -183,24 +183,24 @@ public class Book extends ModelBase<Book, Integer> {
 	}
 
 	public static List<Book> getByTitle(String title) {
-		Criterion c = Restrictions.like("%title%", title); 
+		Criterion c = Restrictions.like("title", "%" + title + "%"); 
 		List<Book> list =  ModelBase.getByCriterion(Book.class, c);
-		if (list == null) new ArrayList<Book>();
+		if (list == null) list = new ArrayList<Book>();
 		return list;
 	}
 	
 	public static List<Book> getByAuthor(Author author) {
 		Criterion c = Restrictions.eq("authorID", author.getAuthorID());
 		List<Book> list =  ModelBase.getByCriterion(Book.class, c);
-		if (list == null) new ArrayList<Book>();
+		if (list == null) list = new ArrayList<Book>();
 		return list;
 	}
 	
 	public static List<Book> getByTitleAndAuthor(String title, Author author) {
 		Criterion c = Restrictions.and(Restrictions.eq("authorID", author.getAuthorID()),
-				                       Restrictions.like("%title%", title));
+				                       Restrictions.like("title", "%" + title + "%"));
 		List<Book> list =  ModelBase.getByCriterion(Book.class, c);
-		if (list == null) new ArrayList<Book>();
+		if (list == null) list = new ArrayList<Book>();
 		return list;
 	}
 	

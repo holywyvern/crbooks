@@ -101,7 +101,7 @@ public class Author extends ModelBase<Author, Integer> {
 	}
 
 	public static List<Author> getByName(String name) {
-		Criterion c = Restrictions.like("%name%", name);
+		Criterion c = Restrictions.like("name", "%" + name + "%");
 		List<Author> list = ModelBase.getByCriterion(Author.class, c);
 		if (list == null) list = new ArrayList<Author>();
 		return list;
