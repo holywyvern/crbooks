@@ -196,7 +196,8 @@ public class CurrentOrderWindow extends CustomComponent {
 		order.setState(OrderState.getAll().get(0));
 		order.setUser(User.getByID(CRBooks.getCurrentUser().getUserID()));
 		CRBooks.getCurrentUser().update();
-		if (CRBooks.getCurrentSession().getOrder() == null ? order.save() : order.update()) {
+		order.setOrderID(CRBooks.getCurrentSession().getOrderID());
+		if ((!CRBooks.getCurrentSession().isEdititing()) ? order.save() : order.update()) {
 			for (OrderItem item : CRBooks.getCurrentSession().getOrderItems()) {
 				OrderItem i = new OrderItem();
 				i.setOrderItemID(item.getOrderItemID());

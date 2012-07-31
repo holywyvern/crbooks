@@ -145,27 +145,9 @@ public class BookDetailsWindow extends CustomComponent {
 				System.out.println(comment.getText());
 			}
 		}
-		boolean bookOwned = false;
-		List<Order> list;
-		try {
-			list = CRBooks.getCurrentUser().getOrders();
-		} catch (Exception e) {
-			list = new ArrayList<Order>();
-		}
-		if ( list == null )list = new ArrayList<Order>();
-		System.out.println(list.size());
-		for (Order order : list) {
-			if (bookOwned) break;
-			for (OrderItem item : order.getItems()) {
-				if (item.getBook().equals(this.book)) {
-					bookOwned = true;
-				}
-				if (bookOwned) break;
-			}
-		}
-		//if (bookOwned) {
+		if (CRBooks.getCurrentUser().hasBook(book)) {
 			this.gridCommentsContainer.addComponent(new CommentAdder(this.book, CRBooks.getCurrentUser()));
-		//}
+		}
 	}
 
 

@@ -19,11 +19,13 @@ public abstract class Session {
 
 	private Order order;
 	
+	private Integer orderID;
 	
 	public Session(User user) {
 		if (user == null) throw new IllegalArgumentException("Session must have an user.");
 		this.user = user;
 		this.order = null;
+		this.orderID = null;
 		this.items = new ArrayList<OrderItem>();
 		this.user.update();
 	}
@@ -79,16 +81,26 @@ public abstract class Session {
 	}
 
 	public Order getOrder() {
-		return this.order;
+		return Order.getByID(this.orderID);
 	}
 	
 	public void setOrder(Order order) {
+		this.orderID = order.getOrderID();
+		this.order = order;
 		this.items = order.getItems();
 		if (this.items == null) this.items = new ArrayList<OrderItem>();
 	}
 	
 	public void closeOrder() {
 		this.order = null;
+	}
+
+	public boolean isEdititing() {
+		return getOrder() != null;
+	}
+
+	public Integer getOrderID() {
+		return this.orderID;
 	}
 	
 }

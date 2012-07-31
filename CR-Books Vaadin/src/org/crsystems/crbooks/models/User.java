@@ -297,4 +297,17 @@ public class User extends ModelBase<User, Integer> {
 		}
 	}
 	
+	public boolean hasBook(Book book) {
+		List<Order> orders = this.getOrders();
+		if (orders == null) return false;
+		for (Order order : orders) {
+			List<OrderItem> items = order.getItems();
+			if (items == null) return false;
+			for (OrderItem item : items) {
+				if (item.getBook().getBookID() == book.getBookID()) return true;
+			}
+		}
+		return false;
+	}
+	
 }

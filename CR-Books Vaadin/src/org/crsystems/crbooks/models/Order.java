@@ -186,5 +186,12 @@ public class Order extends ModelBase<Order, Integer> {
 	public static Order getByID(Integer key) {
 		return ModelBase.getByID(Order.class, Integer.class, key);
 	}
+
+	public boolean isEditable() {
+		if ((new Date()).getTime() - this.getCreatedAt().getTime() > (60 * 60 * 24 * 1000) ) {
+			return false;
+		}
+		return true;
+	}
 	
 }
