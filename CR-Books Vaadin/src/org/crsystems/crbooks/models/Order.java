@@ -161,6 +161,39 @@ public class Order extends ModelBase<Order, Integer> {
 		return list;
 	}
 	
+
+	
+	public static List<Order> getByNameUser(String name){
+		List<User> userList = User.getByFullName(name);
+		List<Order> orders = new ArrayList<Order>();
+		for (User user : userList) {
+			Criterion c = Restrictions.or(Restrictions.sqlRestriction(String.format("user_userID = %s", user.getUserID())));
+										  
+			List<Order> list = ModelBase.getByCriterion(Order.class, c);
+			if (list == null) list = new ArrayList<Order>();
+			orders.addAll(list);
+		}
+		return orders;
+		
+		
+	}
+	
+	public static List<Order> getBySurnameUser(String surname){
+		List<User> userList = User.getByFullName(surname);
+		List<Order> orders = new ArrayList<Order>();
+		for (User user : userList) {
+			Criterion c = Restrictions.or(Restrictions.sqlRestriction(String.format("user_userID = %s", user.getUserID())));
+										  
+			List<Order> list = ModelBase.getByCriterion(Order.class, c);
+			if (list == null) list = new ArrayList<Order>();
+			orders.addAll(list);
+		}
+		return orders;
+		
+		
+	}
+	
+	
 	public static List<Order> getBetweenDatesAndUserName(Date startDate, Date endDate, String username) {
 		List<User> userList = User.getByFullName(username);
 		List<Order> orders = new ArrayList<Order>();
