@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,10 +39,10 @@ public class BookComment extends ModelBase<BookComment, Integer>{
 	@Lob
 	private String text;	
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	private User user;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false, fetch=FetchType.EAGER)
 	private Book book;
 	
 

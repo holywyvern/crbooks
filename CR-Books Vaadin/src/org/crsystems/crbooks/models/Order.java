@@ -37,10 +37,10 @@ public class Order extends ModelBase<Order, Integer> {
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 	
-	@ManyToOne(cascade = {CascadeType.ALL} )
+	@ManyToOne(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
 	private User user;
 	
-	@ManyToOne( cascade = {CascadeType.ALL} )
+	@ManyToOne( cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
 	private OrderState orderState;
 	
 	
@@ -181,6 +181,10 @@ public class Order extends ModelBase<Order, Integer> {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public static Order getByID(Integer key) {
+		return ModelBase.getByID(Order.class, Integer.class, key);
 	}
 	
 }

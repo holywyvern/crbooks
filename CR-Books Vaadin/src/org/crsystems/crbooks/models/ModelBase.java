@@ -161,7 +161,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
             e.printStackTrace();	
 		}		
 		session.close();
-        if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);		
+		if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);		
 		return (K)o;
 	}
 	
@@ -188,7 +188,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
             e.printStackTrace();	
 		}
 		session.close();
-        if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);		
+		if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);		
 		return list;	
 	}
 
@@ -238,7 +238,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
             e.printStackTrace();	
 		}	
 		session.close();
-        if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);			
+		if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);			
 		return null;
 	}
 	

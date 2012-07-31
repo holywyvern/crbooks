@@ -37,10 +37,10 @@ public class Book extends ModelBase<Book, Integer> {
 	@Basic
 	private String title;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Author author;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Publisher publisher;	
 	
 	@Basic

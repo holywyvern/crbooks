@@ -8,10 +8,12 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,13 +34,13 @@ public class OrderItem extends ModelBase<OrderItem, Integer> {
 	private Integer orderItemID;
 
 
-	@OneToOne(optional=false)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Book book;
 	
-	@Basic(optional=false)
+	@Basic()
 	private Integer amount;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Order order;
 	
 	public Integer getOrderItemID() {
