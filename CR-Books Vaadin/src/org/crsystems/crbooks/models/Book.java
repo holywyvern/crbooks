@@ -198,6 +198,15 @@ public class Book extends ModelBase<Book, Integer> {
 		return list;
 	}
 	
+	public static List<Book> getByAuthorName(String authorName) {
+		List<Author> authors = Author.getByName(authorName);
+		List<Book> list = new ArrayList<Book>();
+		for (Author author : authors) {
+			list.addAll(Book.getByAuthor(author));
+		}
+		return list;
+	}
+	
 	public static List<Book> getByTitleAndAuthor(String title, Author author) {
 		Criterion c = Restrictions.and(Restrictions.eq("authorID", author.getAuthorID()),
 				                       Restrictions.like("title", "%" + title + "%"));
