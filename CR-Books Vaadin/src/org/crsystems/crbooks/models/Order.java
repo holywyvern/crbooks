@@ -155,7 +155,7 @@ public class Order extends ModelBase<Order, Integer> {
 	public static List<Order> getBetweenDatesAndUser(Date startDate, Date endDate, User user) {
 		Criterion c = Restrictions.and(Restrictions.le("createdAt", endDate),
 				                       Restrictions.ge("createdAt", startDate),
-				                       Restrictions.eq("userID", user.getUserID()));
+				                       Restrictions.sqlRestriction(String.format("user_userID = %s", user.getUserID())));
 		List<Order> list = ModelBase.getByCriterion(Order.class, c);
 		if (list == null) list = new ArrayList<Order>();
 		return list;
@@ -167,7 +167,7 @@ public class Order extends ModelBase<Order, Integer> {
 		for (User user : userList) {
 			Criterion c = Restrictions.and(Restrictions.le("createdAt", endDate),
 					                       Restrictions.ge("createdAt", startDate),
-				                           Restrictions.eq("userID", user.getUserID()));
+				                           Restrictions.sqlRestriction(String.format("user_userID = %s", user.getUserID())));
 			List<Order> list = ModelBase.getByCriterion(Order.class, c);
 			if (list == null) list = new ArrayList<Order>();
 			orders.addAll(list);

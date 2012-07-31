@@ -1,5 +1,7 @@
 package org.crsystems.crbooks.application;
 
+import javax.servlet.ServletContext;
+
 import org.crsystems.crbooks.application.listeners.LoginListener;
 import org.crsystems.crbooks.models.User;
 import org.crsystems.crbooks.sessions.Session;
@@ -25,9 +27,12 @@ public class CRBooks extends Application {
 	
 	private ApplicationLayout layout;
 	
+	private ServletContext servletContext;
+	
 	@Override
 	public void init() {
 		CRBooks.currentSession = null;
+		servletContext = ((WebApplicationContext)getContext()).getHttpSession().getServletContext();
 		setLocale(((WebApplicationContext)getContext()).getBrowser().getLocale());
 		this.setTheme("cr-books");
 		Window mainWindow = new Window("CR-Books");
@@ -41,6 +46,10 @@ public class CRBooks extends Application {
 		CRBooks.instance = this;
 	}
 
+	public ServletContext getServletContext() {
+		return this.servletContext;
+	}
+	
 	public static SystemMessages getSystemMessages() {
 		CustomizedSystemMessages messages = new CustomizedSystemMessages();
 		messages.setAuthenticationErrorCaption("Error de autentificación") ;
