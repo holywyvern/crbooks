@@ -67,9 +67,6 @@ public class User extends ModelBase<User, Integer> {
 	@Basic
 	private Role role;
 	
-	@OneToMany(mappedBy="orderID")
-	private List<Order> orders;
-	
 	public User() {
 		
 	}
@@ -175,11 +172,13 @@ public class User extends ModelBase<User, Integer> {
 	}
 
 	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+		for (Order order : orders) {
+			order.setUser(this);
+		}
 	}
 	
 	public List<Order> getOrders() {
-		return this.orders;
+		return Order.getByUser(this);
 	}
 	
 	public boolean addOrder(Order order) {
@@ -289,7 +288,13 @@ public class User extends ModelBase<User, Integer> {
 	}
 
 	public List<BookComment> getComments() {
-		return new ArrayList<BookComment>();
+		return BookComment.getByUser(this);
+	}
+
+	public void setComments(List<BookComment> comments) {
+		for (BookComment comment : comments) {
+			comment.setUser(this);
+		}
 	}
 	
 }

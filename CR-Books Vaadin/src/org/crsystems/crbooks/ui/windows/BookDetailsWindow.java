@@ -53,6 +53,8 @@ public class BookDetailsWindow extends CustomComponent {
 	private VerticalLayout gridImage;
 	private Book book;
 
+	private Integer bookID;
+	
 	public BookDetailsWindow() {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
@@ -112,7 +114,6 @@ public class BookDetailsWindow extends CustomComponent {
 		this.book = book;
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
-		addListeners();		
 		this.textBookDescription.setValue(book.getDescription());
 		this.textAmount.setValue(0);
 		this.labelAuthor.setValue(String.format("<b>Autor:</b> %s", book.getAuthor().getName()));
@@ -132,14 +133,17 @@ public class BookDetailsWindow extends CustomComponent {
 		this.labelPublisher.setValue(String.format("<b>Editorial:</b> %s", book.getPublisher().getName()));		
 		makeBookImage();
 		makeBookComments();
+		addListeners();		
 	}
 	
 	
 	private void makeBookComments() {
-		System.out.println(this.book.getComments().size());
-		for (BookComment comment : this.book.getComments()) {
-			this.gridCommentsContainer.addComponent(new CommentControl(comment));
-			System.out.println(comment.getText());
+		if (this.book.getComments() != null) {
+			CRBooks.showTrayMessage(String.format("%d", this.book.getComments().size()));
+			for (BookComment comment : this.book.getComments()) {
+				this.gridCommentsContainer.addComponent(new CommentControl(comment));
+				System.out.println(comment.getText());
+			}
 		}
 		boolean bookOwned = false;
 		List<Order> list;

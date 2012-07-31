@@ -31,9 +31,6 @@ public class Publisher extends ModelBase<Publisher, Integer> {
 	@Basic
 	private String description;
 	
-	@OneToMany(mappedBy="bookID")
-	private List<Book> books;
-	
 	@Override
 	public String getTableName() {
 		return "Publishers";
@@ -68,11 +65,13 @@ public class Publisher extends ModelBase<Publisher, Integer> {
 	}
 
 	public List<Book> getBooks() {
-		return books;
+		return Book.getByPublisher(this);
 	}
 
 	public void setBooks(List<Book> books) {
-		this.books = books;
+		for (Book book : books) {
+			book.setPublisher(this);
+		}
 	}
 
 	public static List<Publisher> getAll() {

@@ -9,6 +9,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,13 +37,10 @@ public class Order extends ModelBase<Order, Integer> {
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 	
-	@OneToMany(mappedBy="orderItemID")
-	private List<OrderItem> orderItems;	
-	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+	@ManyToOne(cascade = {CascadeType.ALL} )
 	private User user;
 	
-	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+	@ManyToOne( cascade = {CascadeType.ALL} )
 	private OrderState orderState;
 	
 	
@@ -61,8 +59,8 @@ public class Order extends ModelBase<Order, Integer> {
 
 	@Override
 	public boolean isValid() {
-		if (this.orderItems == null) return false;
-		if (this.orderItems.size() < 1) return false;
+		if (this.getItems() == null) return false;
+		if (this.getItems().size() < 1) return false;
 		return true;
 	}
 
@@ -89,12 +87,8 @@ public class Order extends ModelBase<Order, Integer> {
 	}
 
 	public List<OrderItem> getItems() {
-		return orderItems;
+		return OrderItem.getByOrder(this);
 	}
-
-	public void setItems(List<OrderItem> items) {
-		this.orderItems = items;
-	}	
 	
 	public Double getTotalPrice() {
 		List<OrderItem> items = getItems();
@@ -123,13 +117,20 @@ public class Order extends ModelBase<Order, Integer> {
 			item.setOrder(this);
 		}
 	}
+	public void setItems(List<OrderItem> list) {
+		for (OrderItem item : list) {
+			item.setOrder(this);
+		}
+		
+	}
+
 	public static List<Order> getAll() {
 		return ModelBase.getAll(Order.class, Integer.class, "Order");
 	}	
 	
 	
 	public static List<Order> getByUser(User user) {
-		Criterion c = Restrictions.eq("userID", user.getUserID());
+		Criterion c = Restrictions.sqlRestriction(String.format("user_userID = %s", user.getUserID()));
 		List<Order> list = ModelBase.getByCriterion(Order.class, c);
 		if (list == null) list = new ArrayList<Order>();
 		return list;

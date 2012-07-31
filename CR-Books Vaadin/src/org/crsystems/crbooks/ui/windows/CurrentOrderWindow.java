@@ -61,7 +61,6 @@ public class CurrentOrderWindow extends CustomComponent {
 	public CurrentOrderWindow() {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
-		this.order = CRBooks.getCurrentSession().getCurrentOrder();
 		createTableColumns();
 		createTableData();
 		makeListeners();
@@ -84,12 +83,21 @@ public class CurrentOrderWindow extends CustomComponent {
 
 
 	private String getTotalPriceCaption() {
-		return String.format("$%.2f", this.order.getTotalPrice());
+		return String.format("$%.2f", getTotalPrice());
+	}
+
+
+	private Double getTotalPrice() {
+		Double tp = 0.0;
+		for (OrderItem item : CRBooks.getCurrentSession().getCurrentItems()) {
+			tp = tp + item.getAmount() * item.getBook().getPrice();
+		}
+		return tp;
 	}
 
 
 	private void createTableData() {
-		List<OrderItem> list = this.order.getItems();
+		List<OrderItem> list = CRBooks.getCurrentSession().getCurrentItems();
 		if (list == null) list = OrderItem.getByOrder(order);
 		if (list == null) list = CRBooks.getCurrentSession().getOrderItems();
 		if (list == null) list = new ArrayList<OrderItem>();
@@ -133,7 +141,7 @@ public class CurrentOrderWindow extends CustomComponent {
 
 
 	protected void onDeleteItemClick(OrderItem item) {
-		CRBooks.getCurrentSession().getCurrentOrder().getItems().remove(item);
+		CRBooks.getCurrentSession().getCurrentItems().remove(item);
 		CRBooks.getCurrentSession().getOrderItems().remove(item);
 		CRBooks.setView(new CurrentOrderWindow());
 	}
@@ -191,6 +199,7 @@ public class CurrentOrderWindow extends CustomComponent {
 				i.setOrder(order);
 				i.saveOrUpdate();
 			}
+			CRBooks.getCurrentSession().getCurrentItems().clear();
 			CRBooks.setView(new ViewUserOrders());
 			CRBooks.showTrayMessage("Se ha realizado su pedido exitosamente.");
 		}

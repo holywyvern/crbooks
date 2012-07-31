@@ -15,17 +15,14 @@ public abstract class Session {
 	
 	private org.hibernate.Session session;
 	
-	private Order currentOrder;
-	
 	private List<OrderItem> items;
 	
 	
 	public Session(User user) {
 		if (user == null) throw new IllegalArgumentException("Session must have an user.");
 		this.user = user;
-		this.currentOrder = new Order();
-		this.currentOrder.setUser(user);
-		user.addOrder(this.currentOrder);
+		new Order();
+		this.items = new ArrayList<OrderItem>();
 	}
 	
 	public User getUser() {
@@ -47,22 +44,12 @@ public abstract class Session {
 		this.session.close();
 		this.session = null;
 	}
-
-	public Order getCurrentOrder() {
-		return currentOrder;
-	}
-
+	
 	public void setCurrentOrder(Order currentOrder) {
-		this.currentOrder = currentOrder;
-		this.currentOrder.setUser(user);
-		user.addOrder(this.currentOrder);
 		this.items = new ArrayList<OrderItem>();
 	}
 
 	public void addItem(OrderItem item) {
-		if (this.currentOrder == null) this.currentOrder = new Order();
-		if (this.currentOrder.getItems() == null) this.currentOrder.setItems(new ArrayList<OrderItem>());
-		this.currentOrder.addItem(item);
 		showAddedOrder(item);
 		if (this.items == null) this.items = new ArrayList<OrderItem>();
 		boolean isAdded = false;
@@ -83,6 +70,11 @@ public abstract class Session {
 	}
 
 	public List<OrderItem> getOrderItems() {
+		if (this.items == null) this.items = new ArrayList<OrderItem>();
+		return this.items;
+	}
+
+	public List<OrderItem> getCurrentItems() {
 		if (this.items == null) this.items = new ArrayList<OrderItem>();
 		return this.items;
 	}

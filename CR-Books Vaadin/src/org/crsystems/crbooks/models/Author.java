@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.criterion.Criterion;
@@ -33,18 +35,17 @@ public class Author extends ModelBase<Author, Integer> {
 	
 	@Basic
 	private String description;
-	
-	@OneToMany(mappedBy="bookID")
-	private List<Book> books;
-	
-	public List<Book> getBooks() {
-		return books;
-	}
 
 	public void setBooks(List<Book> books) {
-		this.books = books;
+		for (Book book : books) {
+			book.setAuthor(this);
+		}
 	}
 
+	public List<Book> getBooks() {
+		return Book.getByAuthor(this);
+	}
+	
 	public String getName() {
 		return name;
 	}

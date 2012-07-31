@@ -38,7 +38,7 @@ public class OrderItem extends ModelBase<OrderItem, Integer> {
 	@Basic(optional=false)
 	private Integer amount;
 	
-	@OneToOne(optional=false)
+	@ManyToOne(optional=false)
 	private Order order;
 	
 	public Integer getOrderItemID() {

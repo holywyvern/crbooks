@@ -139,10 +139,12 @@ public class CRBooks extends Application {
 	}	
 	
 	public static boolean userSignedIn() {
+		if (CRBooks.currentSession == null || CRBooks.currentSession.getUser() == null) return false;
 		return (CRBooks.currentSession != null);
 	}
 	
 	public static boolean clientSignedIn() {
+		
 		return (CRBooks.userSignedIn() && CRBooks.currentSession.getUser().isClient());
 	}
 	

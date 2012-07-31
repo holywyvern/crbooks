@@ -56,7 +56,6 @@ public class Book extends ModelBase<Book, Integer> {
 	@ManyToMany
 	private List<BookCategory> categories;
 	
-	
 	@Override
 	public String getTableName() {
 		// TODO Auto-generated method stub
@@ -216,7 +215,18 @@ public class Book extends ModelBase<Book, Integer> {
 	}
 
 	public List<BookComment> getComments() {
-		return new ArrayList<BookComment>();
+		return BookComment.getByBook(this);
+	}
+
+	public void setComments(List<BookComment> comments) {
+		for (BookComment comment : comments) {
+			comment.setBook(this);
+		}
+	}
+
+	public static List<Book> getByPublisher(Publisher publisher) {
+		Criterion c = Restrictions.eq("publisherID", publisher.getPublisherID());
+		return ModelBase.getByCriterion(Book.class, c);
 	}
 	
 }
