@@ -58,7 +58,9 @@ public class ViewResultsSearchBooks extends CustomComponent {
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 
 	public Book item;
-	public SearchBooksWindow search; 
+	private String title;
+	private String author;
+	
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 
 	/**
@@ -71,7 +73,13 @@ public class ViewResultsSearchBooks extends CustomComponent {
 	public ViewResultsSearchBooks() {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
-
+		this.title = "";
+		this.author = "";
+	}
+	public ViewResultsSearchBooks(String title, String author) {
+		this();
+		this.title = title;
+		this.author = author;
 		// TODO add user code here
 	}
 
@@ -82,7 +90,7 @@ public class ViewResultsSearchBooks extends CustomComponent {
 		mainLayout.setImmediate(false);
 		mainLayout.setWidth("100%");
 		mainLayout.setHeight("100%");
-		mainLayout.setMargin(false);
+		mainLayout.setMargin(true);
 		
 		// top-level component properties
 		setWidth("100.0%");
@@ -118,11 +126,11 @@ public class ViewResultsSearchBooks extends CustomComponent {
 		verticalLayout_2.setImmediate(false);
 		verticalLayout_2.setWidth("100.0%");
 		verticalLayout_2.setHeight("100.0%");
-		verticalLayout_2.setMargin(false);
+		verticalLayout_2.setMargin(true);
 		
 		// labelTittle
 		labelTittle = new Label();
-		labelTittle.setImmediate(false);
+		labelTittle.setImmediate(true);
 		labelTittle.setWidth("-1px");
 		labelTittle.setHeight("-1px");
 		labelTittle.setValue("<h2> Resultado de la Busqueda<h2>");
@@ -144,12 +152,13 @@ public class ViewResultsSearchBooks extends CustomComponent {
 	
 	public List<Book> getBooksSearch()
 	{
-		if(!search.textFieldLibro.getValue().toString().equals("")){
-			return Book.getByTitle(search.textFieldLibro.getValue().toString());
+		if(title!=null && !title.equals("")){
+			return Book.getByTitle(title);
 		}
-			
+		else
+		{
 		return Book.getAll();
-		
+		}
 	}
 	
 	
