@@ -53,6 +53,9 @@ public class Book extends ModelBase<Book, Integer> {
 	@ManyToMany
 	private List<BookCategory> categories;
 	
+	@OneToMany(mappedBy="bookCommentID")
+	private List<BookComment> comments;
+	
 	@Override
 	public String getTableName() {
 		// TODO Auto-generated method stub
@@ -180,7 +183,7 @@ public class Book extends ModelBase<Book, Integer> {
 	}
 
 	public static List<Book> getByTitle(String title) {
-		Criterion c = Restrictions.like("title", title); 
+		Criterion c = Restrictions.like("%title%", title); 
 		List<Book> list =  ModelBase.getByCriterion(Book.class, c);
 		if (list == null) new ArrayList<Book>();
 		return list;
@@ -195,7 +198,7 @@ public class Book extends ModelBase<Book, Integer> {
 	
 	public static List<Book> getByTitleAndAuthor(String title, Author author) {
 		Criterion c = Restrictions.and(Restrictions.eq("authorID", author.getAuthorID()),
-				                       Restrictions.like("title", title));
+				                       Restrictions.like("%title%", title));
 		List<Book> list =  ModelBase.getByCriterion(Book.class, c);
 		if (list == null) new ArrayList<Book>();
 		return list;
@@ -209,6 +212,14 @@ public class Book extends ModelBase<Book, Integer> {
 			result.addAll(list);
 		}
 		return result;
+	}
+
+	public List<BookComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<BookComment> comments) {
+		this.comments = comments;
 	}
 	
 }

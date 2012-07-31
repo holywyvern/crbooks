@@ -151,18 +151,16 @@ public class ApplicationLayout extends CustomComponent {
 		MenuItem item = menuToolbar.addItem(String.format("%s %s %s", CRBooks.getCurrentUser().getFirstName(),
 											CRBooks.getCurrentUser().getLastName(), "" + '\u25bc'), null);
 		generateClientSubmenu(item);
-		menuToolbar.addItem("Busqueda", makeOrderCommand());
+		item = menuToolbar.addItem("Catálogo" + '\u25bc', null);
+		generateSubMenuBookList(item);
 		menuToolbar.addItem("Página principal", makeHomeCommand());
 		
 		
 	}	
-	
-	
 
-	private void generateSubMenuCatalogo(MenuItem item) {
-		item.addItem("Todos los Libros", null);
-		item.addSeparator();
-		item.addItem("Busqueda", makeOrderCommand());
+	private void generateSubMenuBookList(MenuItem item) {
+		item.addItem("Ver catálogo completo", makeOrderCommand());
+		item.addItem("Realizar búsqueda", makeOrderCommand());
 	}
 
 	private void generateClientSubmenu(MenuItem item) {

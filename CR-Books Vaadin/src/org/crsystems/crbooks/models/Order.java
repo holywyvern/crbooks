@@ -36,7 +36,6 @@ public class Order extends ModelBase<Order, Integer> {
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	private User user;
 	
-	@Basic
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 	

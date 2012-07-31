@@ -17,6 +17,7 @@
    		<mapping class="org.crsystems.crbooks.models.Author"/>
     	<mapping class="org.crsystems.crbooks.models.Book"/>  
     	<mapping class="org.crsystems.crbooks.models.BookCategory"/>
+    	<mapping class="org.crsystems.crbooks.models.BookComment"/>
     	<mapping class="org.crsystems.crbooks.models.Order"/>  
     	<mapping class="org.crsystems.crbooks.models.OrderItem"/>  
     	<mapping class="org.crsystems.crbooks.models.OrderState"/> 

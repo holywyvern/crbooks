@@ -41,6 +41,35 @@ public class CRBooks extends Application {
 		CRBooks.instance = this;
 	}
 
+	public static SystemMessages getSystemMessages() {
+		CustomizedSystemMessages messages = new CustomizedSystemMessages();
+		messages.setAuthenticationErrorCaption("") ;
+		messages.setAuthenticationErrorMessage("") ;
+		messages.setAuthenticationErrorURL("") ;
+		messages.setCommunicationErrorCaption("") ;
+		messages.setCommunicationErrorMessage("") ;
+		messages.setCommunicationErrorURL("") ;
+		messages.setCookiesDisabledCaption("") ; 
+		messages.setCookiesDisabledMessage("") ; 
+		messages.setCookiesDisabledURL("") ;
+		messages.setInternalErrorCaption("") ;
+		messages.setInternalErrorMessage("") ;
+		messages.setInternalErrorURL("") ;
+		messages.setOutOfSyncCaption("") ;
+		messages.setOutOfSyncMessage("") ;
+		messages.setOutOfSyncURL("") ;
+		messages.setSessionExpiredCaption("") ;
+		messages.setSessionExpiredMessage("") ;
+		messages.setSessionExpiredURL("");
+		messages.setAuthenticationErrorNotificationEnabled(true);
+		messages.setCommunicationErrorNotificationEnabled(true);
+		messages.setCookiesDisabledNotificationEnabled(true);
+		messages.setInternalErrorNotificationEnabled(true);
+		messages.setOutOfSyncNotificationEnabled(true);
+		messages.setSessionExpiredNotificationEnabled(true);
+		return messages;
+	}
+
 	public static CRBooks getInstance() {
 		return instance;
 	}
@@ -80,8 +109,10 @@ public class CRBooks extends Application {
 	public static void setCurrentSession(Session session) {
 		if (CRBooks.currentSession != null) CRBooks.currentSession.close();
 		CRBooks.currentSession = session;
-		CRBooks.currentSession.setSession(HibernateUtil.getSessionFactory().openSession());
-		if (CRBooks.instance != null) CRBooks.instance.makeMenuCommands();
+		if (CRBooks.currentSession != null) {
+			CRBooks.currentSession.setSession(HibernateUtil.getSessionFactory().openSession());
+		}
+		if (CRBooks.instance != null) CRBooks.instance.makeMenuCommands();		
 		CRBooks.setView(new HomeWindow());
 	}	
 	

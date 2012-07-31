@@ -67,6 +67,9 @@ public class User extends ModelBase<User, Integer> {
 	@OneToMany(mappedBy="orderID")
 	private List<Order> orders;
 	
+	@OneToMany(mappedBy="bookCommentID")
+	private List<BookComment> comments;
+	
 	public User() {
 		
 	}
@@ -279,6 +282,10 @@ public class User extends ModelBase<User, Integer> {
 		List<User> list = ModelBase.getByCriterion(User.class, c);
 		if (list == null) list = new ArrayList<User>();
 		return list;
+	}
+
+	public Object getFormatedName() {
+		return String.format("%s %s", this.firstName, this.lastName);
 	}
 	
 }
