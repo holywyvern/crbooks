@@ -46,6 +46,8 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
             transaction.rollback();
             e.printStackTrace();
         }		
+        session.close();
+        if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);
 		return saved;
 	}
 	
@@ -72,7 +74,9 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
         } catch (HibernateException e) {
             transaction.rollback();
             e.printStackTrace();
-        }			
+        }	
+        session.close();
+        if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);        
 		return saved;
 	}
 	
@@ -99,7 +103,9 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
         } catch (HibernateException e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
-        }			
+        }		
+        session.close();
+        if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);        
 		return saved;
 	}
 	
@@ -126,7 +132,9 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
         } catch (HibernateException e) {
         	if (transaction != null) transaction.rollback();
             e.printStackTrace();
-        }			
+        }	
+        session.close();
+        if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);       
 		return saved;
 	}
 	
@@ -152,6 +160,8 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 			if (transaction != null) transaction.rollback();
             e.printStackTrace();	
 		}		
+		session.close();
+        if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);		
 		return (K)o;
 	}
 	
@@ -177,6 +187,8 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 			if (transaction != null) transaction.rollback();
             e.printStackTrace();	
 		}
+		session.close();
+        if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);		
 		return list;	
 	}
 
@@ -192,7 +204,7 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 		else {
 			session = HibernateUtil.getSessionFactory().openSession();	
 		}		
-		session.saveOrUpdate(object);
+		session.saveOrUpdate(object);	
 		return true;
 	}		
 	
@@ -225,6 +237,8 @@ public abstract class ModelBase<T, PK extends Serializable> implements IDatabase
 			if (transaction != null) transaction.rollback();
             e.printStackTrace();	
 		}	
+		session.close();
+        if (CRBooks.getCurrentSession() != null) CRBooks.getCurrentSession().setSession(null);			
 		return null;
 	}
 	

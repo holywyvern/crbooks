@@ -16,13 +16,16 @@ public abstract class Session {
 	private org.hibernate.Session session;
 	
 	private List<OrderItem> items;
+
+	private Order order;
 	
 	
 	public Session(User user) {
 		if (user == null) throw new IllegalArgumentException("Session must have an user.");
 		this.user = user;
-		new Order();
+		this.order = null;
 		this.items = new ArrayList<OrderItem>();
+		this.user.update();
 	}
 	
 	public User getUser() {
@@ -35,7 +38,7 @@ public abstract class Session {
 
 	public void setSession(org.hibernate.Session session) {
 		if (this.session != null) {
-			this.session.close();
+			if (this.session.isConnected()) this.session.close();
 		}
 		this.session = session;
 	}
@@ -43,10 +46,6 @@ public abstract class Session {
 	public void close() {
 		this.session.close();
 		this.session = null;
-	}
-	
-	public void setCurrentOrder(Order currentOrder) {
-		this.items = new ArrayList<OrderItem>();
 	}
 
 	public void addItem(OrderItem item) {
@@ -78,6 +77,18 @@ public abstract class Session {
 		if (this.items == null) this.items = new ArrayList<OrderItem>();
 		return this.items;
 	}
+
+	public Order getOrder() {
+		return this.order;
+	}
 	
+	public void setOrder(Order order) {
+		this.items = order.getItems();
+		if (this.items == null) this.items = new ArrayList<OrderItem>();
+	}
+	
+	public void closeOrder() {
+		this.order = null;
+	}
 	
 }

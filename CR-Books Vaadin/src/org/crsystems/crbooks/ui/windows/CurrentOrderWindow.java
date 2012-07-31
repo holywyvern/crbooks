@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.crsystems.crbooks.application.CRBooks;
+import org.crsystems.crbooks.application.HibernateUtil;
 import org.crsystems.crbooks.models.Order;
 import org.crsystems.crbooks.models.OrderItem;
 import org.crsystems.crbooks.models.OrderState;
@@ -187,19 +188,18 @@ public class CurrentOrderWindow extends CustomComponent {
 
 
 	protected void onButtonCloseOrder() {
-		Order order = new Order();
+		Order order = CRBooks.getCurrentSession().getOrder();
+		if (order == null) order = new Order();
 		order.setCreatedAt(new Date());
 		order.setState(OrderState.getAll().get(0));
 		order.setUser(CRBooks.getCurrentUser());
-		if (order.saveOrUpdate()) {
+		CRBooks.getCurrentUser().update();
+		if (CRBooks.getCurrentSession().getOrder() == null ? order.save() : order.update()) {
 			for (OrderItem item : CRBooks.getCurrentSession().getOrderItems()) {
-				OrderItem i = new OrderItem();
-				i.setAmount(item.getAmount());
-				i.setBook(item.getBook());
-				i.setOrder(order);
-				i.saveOrUpdate();
+				item.saveOrUpdate();
 			}
 			CRBooks.getCurrentSession().getCurrentItems().clear();
+			CRBooks.getCurrentSession().closeOrder();
 			CRBooks.setView(new ViewUserOrders());
 			CRBooks.showTrayMessage("Se ha realizado su pedido exitosamente.");
 		}

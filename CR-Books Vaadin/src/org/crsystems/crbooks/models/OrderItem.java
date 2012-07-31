@@ -95,7 +95,7 @@ public class OrderItem extends ModelBase<OrderItem, Integer> {
 	}
 
 	public static List<OrderItem> getByOrder(Order order) {
-		Criterion c = Restrictions.eq("orderID", order.getOrderID());
+		Criterion c = Restrictions.sqlRestriction(String.format("order_orderID = %d", order.getOrderID()));
 		List<OrderItem> list = null;
 		list = ModelBase.getByCriterion(OrderItem.class, c);
 		if (list == null) list = new ArrayList<OrderItem>();

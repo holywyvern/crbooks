@@ -31,6 +31,8 @@ public class ViewUserOrders extends CustomComponent {
 
 
 	private void drawNoOrdersPanel() {
+		Label label = new Label("<h1>No haz realizado ningún pedido aún.</h1>");
+		gridBase.addComponent(label);
 	}
 
 
