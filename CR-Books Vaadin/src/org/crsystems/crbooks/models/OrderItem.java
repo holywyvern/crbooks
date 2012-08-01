@@ -104,4 +104,9 @@ public class OrderItem extends ModelBase<OrderItem, Integer> {
 		return list;
 	}	
 	
+	public boolean equals(Object other) {
+		if (other != null && other instanceof OrderItem && ((OrderItem)other).getOrderItemID() == this.getOrderItemID()) return true;
+		return super.equals(other);
+	}
+	
 }

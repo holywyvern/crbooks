@@ -47,7 +47,7 @@ public class ViewBooksWindow extends ViewBaseWindow<Book, Integer> {
 		label.setStyleName(klass);	
 		return new Object[] {
 				item.getTitle(),
-				item.getAuthor().getName(),
+				(item.getAuthor() != null) ? item.getAuthor().getName() : "",
 				item.getPublisher().getName(),
 				item.getEdition(),
 				String.format("%.2f", item.getPrice()),

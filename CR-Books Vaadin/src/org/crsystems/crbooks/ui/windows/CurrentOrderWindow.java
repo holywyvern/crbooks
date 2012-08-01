@@ -145,6 +145,7 @@ public class CurrentOrderWindow extends CustomComponent {
 	protected void onDeleteItemClick(OrderItem item) {
 		CRBooks.getCurrentSession().getCurrentItems().remove(item);
 		CRBooks.getCurrentSession().getOrderItems().remove(item);
+		CRBooks.getCurrentSession().removeItem(item);
 		CRBooks.setView(new CurrentOrderWindow());
 	}
 

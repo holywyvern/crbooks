@@ -38,6 +38,12 @@ public abstract class Session {
 		return session;
 	}
 
+	public void removeItem(OrderItem item) {
+		if (item.delete()) {
+			this.items.remove(item);
+		}
+	}
+	
 	public void setSession(org.hibernate.Session session) {
 		if (this.session != null) {
 			if (this.session.isConnected()) this.session.close();
