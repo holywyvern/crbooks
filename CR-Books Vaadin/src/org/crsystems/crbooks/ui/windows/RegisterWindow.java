@@ -62,6 +62,7 @@ public class RegisterWindow extends CustomComponent {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 		makeListeners();
+		buttonRegister.addStyleName("default");
 	}
 
 	
@@ -296,7 +297,10 @@ public class RegisterWindow extends CustomComponent {
 		labelEmail.setImmediate(false);
 		labelEmail.setWidth("-1px");
 		labelEmail.setHeight("-1px");
-		labelEmail.setValue("Dirección de correo electrónico:");
+		labelEmail.setValue("Dirección de correo electrónico:<i><br />(Si dispone de una cuenta de " +
+				"<a href=\"http://es.gravatar.com/\" target=\"_blank\">Gravatar</a><br /> se utilizará " +
+				"como avatar)</i>");
+		labelEmail.setContentMode(Label.CONTENT_XHTML);
 		gridFormFields.addComponent(labelEmail, 0, 2);
 		
 		// textEmail

@@ -32,6 +32,7 @@ public class EditCategoryWindow extends CustomComponent implements EditBaseWindo
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 		createListeners();
+		buttonForm.addStyleName("default");
 	}
 
 	

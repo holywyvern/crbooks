@@ -1,16 +1,16 @@
-@import url(../reindeer/styles.css);
+@import url(../chameleon/styles.css);
+@import "blue-chameleon.css";
 
 .cr-books-logo-bar {
 	font-size: 2em;
 	color: #FFFFFF;
 	padding: 0.2em 0.1em;
-	background-image: url(img/menu-background.bmp);
+	
 }
 
 .cr-books-menu-commands {
 	color: #FFFFFF;
 	padding: 0.2em 0.1em;
-	background-image: url(img/menu-background.bmp);
 	text-decoration: underline;
 }
 
@@ -41,4 +41,19 @@
 .cr-books-price-label-lower-zero {
 	color: #880000;
 	font-weight:bold;
+}
+
+.cr-books-comment {
+	background-color: #CCCCFF;
+	border:2px solid gray;
+}
+
+.cr-books-comment-adder {
+	background-color: #DDEEFF;
+	border:5px solid gray;
+}
+
+.v-app {
+	background-img: url("img/bg/base.png");
+	background-color: #CDDDEE;
 }

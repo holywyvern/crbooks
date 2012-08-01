@@ -46,7 +46,7 @@ public abstract class Session {
 	}
 	
 	public void close() {
-		this.session.close();
+		if (this.session != null) this.session.close();
 		this.session = null;
 	}
 
@@ -81,6 +81,7 @@ public abstract class Session {
 	}
 
 	public Order getOrder() {
+		if (this.orderID == null) return null;
 		return Order.getByID(this.orderID);
 	}
 	

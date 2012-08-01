@@ -34,6 +34,7 @@ public class EditPublisherWindow extends CustomComponent implements EditBaseWind
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 		createListeners();
+		buttonForm.addStyleName("default");
 	}
 
 	

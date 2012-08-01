@@ -40,6 +40,7 @@ public class LoginWindow extends CustomComponent {
 		this.setCompositionRoot(mainLayout);
 		this.makeListeners();
 		this.onRegister = onRegister;
+		buttonLogin.addStyleName("alternate default");
 	}
 
 	

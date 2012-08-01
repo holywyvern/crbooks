@@ -37,6 +37,7 @@ public class NewOrderStateWindow extends CustomComponent{
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 		makeListeners();
+		buttonForm.addStyleName("default");
 	}
 
 	

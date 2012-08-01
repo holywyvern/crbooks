@@ -23,7 +23,7 @@ public class CommentControl extends CustomComponent {
 	
 	private HorizontalLayout mainLayout;
 	private VerticalLayout gridData;
-	private TextArea textComment;
+	private Label textComment;
 	private Label labelAuthor;
 	private Panel panelPhoto;
 	private VerticalLayout gridPhoto;
@@ -35,9 +35,12 @@ public class CommentControl extends CustomComponent {
 
 	public CommentControl(BookComment comment) {
 		this();
-		this.labelAuthor.setValue(String.format("%s (%s) dijo:", comment.getUser().getFormatedName(),
+		this.labelAuthor.setValue(String.format("<b>%s (%s) dijo:</b>", comment.getUser().getFormatedName(),
 				makeFormattedTime(comment.getCreatedAt())));
 		this.textComment.setValue(comment.getText());
+		this.labelAuthor.setContentMode(Label.CONTENT_XHTML);
+		this.addStyleName("cr-books-comment");
+		mainLayout.setMargin(true);
 		addPhoto(comment);
 	}
 	
@@ -138,13 +141,11 @@ public class CommentControl extends CustomComponent {
 		gridData.addComponent(labelAuthor);
 		
 		// textComment
-		textComment = new TextArea();
+		textComment = new Label();
 		textComment.setImmediate(false);
 		textComment.setWidth("320px");
 		textComment.setHeight("-1px");
-		textComment.setReadThrough(false);
-		textComment.setWriteThrough(false);
-		textComment.setEnabled(false);
+		//textComment.setEnabled(false);
 		gridData.addComponent(textComment);
 		
 		return gridData;

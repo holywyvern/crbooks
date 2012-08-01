@@ -57,6 +57,7 @@ public class NewBookWindow extends CustomComponent {
 		putAuthors();
 		putPublishers();
 		createListeners();
+		buttonForm.addStyleName("default");
 	}
 
 	

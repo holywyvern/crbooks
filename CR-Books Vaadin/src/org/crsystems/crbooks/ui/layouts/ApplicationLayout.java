@@ -195,7 +195,7 @@ public class ApplicationLayout extends CustomComponent {
 		MenuItem item = menuToolbar.addItem(String.format("%s %s %s", CRBooks.getCurrentUser().getFirstName(),
 											CRBooks.getCurrentUser().getLastName(), "" + '\u25bc'), null);
 		try {
-			item.setIcon(new GravatarResource(CRBooks.getCurrentUser().getEmail(), 16,
+			item.setIcon(new GravatarResource(CRBooks.getCurrentUser().getEmail(), 12,
                     null, null));
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
@@ -274,7 +274,7 @@ public class ApplicationLayout extends CustomComponent {
 		MenuItem item = menuToolbar.addItem(String.format("%s %s(Gerente)%s", CRBooks.getCurrentUser().getFirstName(),
 											CRBooks.getCurrentUser().getLastName(), "" + '\u25bc'), null);
 		try {
-			item.setIcon(new GravatarResource(CRBooks.getCurrentUser().getEmail(), 16,
+			item.setIcon(new GravatarResource(CRBooks.getCurrentUser().getEmail(), 12,
                     null, null));
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
@@ -307,7 +307,7 @@ public class ApplicationLayout extends CustomComponent {
 		MenuItem item = menuToolbar.addItem(String.format("%s %s(Administrador)%s", CRBooks.getCurrentUser().getFirstName(),
 											CRBooks.getCurrentUser().getLastName(), "" + '\u25bc'), null);
 		try {
-			item.setIcon(new GravatarResource(CRBooks.getCurrentUser().getEmail(), 16,
+			item.setIcon(new GravatarResource(CRBooks.getCurrentUser().getEmail(), 12,
                     null, null));
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
@@ -434,7 +434,7 @@ public class ApplicationLayout extends CustomComponent {
 		menuToolbar = new MenuBar();
 		menuToolbar.setImmediate(true);
 		menuToolbar.setWidth("-1px");
-		menuToolbar.setHeight("2.3em");
+		menuToolbar.setHeight("3.7em");
 		menuToolbar.addStyleName("cr-books-menu-commands");
 		gridMenus.addComponent(menuToolbar);
 		

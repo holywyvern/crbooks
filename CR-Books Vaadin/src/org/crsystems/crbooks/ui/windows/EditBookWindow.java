@@ -59,6 +59,7 @@ public class EditBookWindow extends CustomComponent implements EditBaseWindow<Bo
 		putAuthors();
 		putPublishers();		
 		createListeners();
+		buttonForm.addStyleName("default");
 	}
 
 	private void putAuthors() {

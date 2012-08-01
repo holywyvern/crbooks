@@ -37,6 +37,7 @@ public class EditOrderStateWindow extends CustomComponent  implements EditBaseWi
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 		makeListeners();
+		buttonForm.addStyleName("default");
 	}
 
 	

@@ -105,7 +105,7 @@ public class BookDetailsWindow extends CustomComponent {
 		// panelBase
 		panelBase = buildPanelBase();
 		mainLayout.addComponent(panelBase);
-		
+		mainLayout.setComponentAlignment(panelBase, Alignment.TOP_CENTER);
 		// gridComments
 		gridComments = buildGridComments();
 		mainLayout.addComponent(gridComments);
@@ -167,13 +167,12 @@ public class BookDetailsWindow extends CustomComponent {
 		// common part: create layout
 		panelBase = new Panel();
 		panelBase.setImmediate(false);
-		panelBase.setWidth("100.0%");
+		panelBase.setWidth("640px");
 		panelBase.setHeight("-1px");
 		
 		// gridPanelBase
 		gridPanelBase = buildGridPanelBase();
 		panelBase.setContent(gridPanelBase);
-		
 		return panelBase;
 	}
 
@@ -417,7 +416,7 @@ public class BookDetailsWindow extends CustomComponent {
 		labelCommentHeader.setValue("<h2>Comentarios</h2>");
 		labelCommentHeader.setContentMode(3);
 		gridComments.addComponent(labelCommentHeader);
-		
+		gridComments.setComponentAlignment(labelCommentHeader, Alignment.TOP_CENTER);
 		// gridCommentsContainer
 		gridCommentsContainer = new VerticalLayout();
 		gridCommentsContainer.setImmediate(false);

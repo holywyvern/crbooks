@@ -33,6 +33,7 @@ public class NewPublisherWindow extends CustomComponent {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 		createListeners();
+		buttonForm.addStyleName("default");
 	}
 
 	
