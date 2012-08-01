@@ -119,14 +119,18 @@ public class ViewPerfilConfiguration extends CustomComponent {
 		tabSheet.setWidth("100.0%");
 		tabSheet.setHeight("100.0%");
 		
-		// panelPerfil
-		panelPerfil = buildPanelPerfil();
-		tabSheet.addTab(panelPerfil, "Perfil", null);
 		
 		// panelEditar
 		panelEditar = buildPanelEditar();
-	
+		panelEditar.addComponent(new WindowEditarTabsheet());
 		tabSheet.addTab(panelEditar, "Editar", null);
+		
+		
+		// panelPerfil
+		panelPerfil = buildPanelPerfil();		
+		tabSheet.addTab(panelPerfil, "Perfil", null);
+		
+		
 		
 		// panelPreferencias
 		panelPreferencias = buildPanelPreferencias();
